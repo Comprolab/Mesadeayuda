@@ -31,7 +31,7 @@ $calling_script = basename($_SERVER['PHP_SELF'], '.php');
                     <use xlink:href="<?php echo HESK_PATH; ?>img/sprite.svg#icon-menu"></use>
                 </svg>
             </button>
-            <a class="navbar__logo" href="admin_main.php">
+            <a class="navbar__logo" href="admin_main.php" style="width: 150px;">
                 <?php echo $hesklang['help_desk']; ?>
             </a>
         </div>

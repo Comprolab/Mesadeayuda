@@ -1654,7 +1654,7 @@ $hesklang['confirm_delete_status']='Are you sure you want to delete this custom 
 $hesklang['critical']='Critical';
 $hesklang['canned_add']='New canned response';
 $hesklang['ticket_tpl_add']='New ticket template';
-$hesklang['help_desk']='<img src=\'https://static.wixstatic.com/media/cc9d3c_1f57b51b1a764bed8cc6cd965c43540e~mv2.png/v1/fill/w_194,h_134,al_c,q_85,usm_0.66_1.00_0.01/Logo_Comprolab.webp\' width=\'100\' ></img>'; // Displayed on staff sidebar menu
+$hesklang['help_desk']='<img src=\'https://static.wixstatic.com/media/cc9d3c_1f57b51b1a764bed8cc6cd965c43540e~mv2.png/v1/fill/w_194,h_134,al_c,q_85,usm_0.66_1.00_0.01/Logo_Comprolab.webp\'  ></img>'; // Displayed on staff sidebar menu
 
 // Added or modified in HESK 3.1.0
 $hesklang['TIMEAGO_LANG_FILE']='jquery.timeago.en.js'; // Name of the proper language file in folder /js/timeago/locales

@@ -521,7 +521,33 @@ $calling_script = basename($_SERVER['PHP_SELF'], '.php');
                         </ul>
                     </div>
                 </li>
+                <!---menu calendar --->
+                <li class="listitem submenu <?php echo $open_menu; ?>">
+                    <div class="listitem__icon">
+                        <a class="icon icon-settings" href="#">
+                        <img src="<?php echo HESK_PATH; ?>img/calendar2.png">
+                            <svg class="icon icon-settings">
+                                <use xlink:href="<?php echo HESK_PATH; ?>img/sprite.svg#icon-zone"></use>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="listitem__menu">
+                        <a href="#" class="listitem__caption">
+                            <?php echo "Calendario y reportes" ?>
+                        </a>
+                        <ul class="submenu__list">
+                            <li class="submenu__listitem ">
+                                <a href="Calendar.php">
+                                    calendaro
+                                </a>
+                            </li>
+                          
+                           
+                        </ul>
+                    </div>
+                </li>
 
+                <!--fin menu calrendar--->
 
 
 

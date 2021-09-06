@@ -45,9 +45,8 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 /* This will handle error, success and notice messages */
 hesk_handle_messages();
 ?>
-</div>
-<!----contenido-->
-<!DOCTYPE html>
+    
+	<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -69,7 +68,6 @@ hesk_handle_messages();
 Include JQuery Core (Required for calendar plugin)
 ** This is our IE fix version which enables drag-and-drop to work correctly in IE. See README file in js/jquery-core folder. **
 -->
-<!---src="js/jquery-core/jquery-1.4.2-ie-fix.min.js-->
 <script type="text/javascript" src="js/jquery-core/jquery-1.4.2-ie-fix.min.js"></script>
 
 <!-- Include JQuery UI (Required for calendar plugin.) -->
@@ -210,7 +208,7 @@ $(document).ready(function(){
 	/**
 	 * Make the day cells roughly 3/4th as tall as they are wide. this makes our calendar wider than it is tall. 
 	 */
-	jfcalplugin.setAspectRatio("#mycal",0.50);
+	jfcalplugin.setAspectRatio("#mycal",0.75);
 
 	/**
 	 * Called when user clicks day cell
@@ -598,14 +596,7 @@ $(document).ready(function(){
 </script>
 <br>
 		
-		<div class="shadow" style="border: 1px solid #aaaaaa; padding: 3px;">
-			<b>
-			Click the calendar to add some agenda items.
-			<br><br>
-			Please note that Chrome prevents AJAX calls from reading local files on disk so the iCal example will not work. Try in Firefox, Safari, Opera, or IE.
-			For Chrome it should work when the iCal file is hosted online from your domain.
-			</b>
-		</div>
+	
 		
 		<br><br>
 
@@ -615,7 +606,7 @@ $(document).ready(function(){
 			&nbsp;&nbsp;&nbsp;
 			Date: <input type="text" id="dateSelect" size="20"/>
 			&nbsp;&nbsp;&nbsp;
-			<button id="BtnDeleteAll">Delete All</button>
+		
 			<button id="BtnICalTest">iCal Test</button>
 			<input type="text" id="iCalSource" size="30" value="extra/fifa-world-cup-2010.ics"/>
 		</div>
@@ -766,6 +757,10 @@ $(document).ready(function(){
     
 </body>
 </html>
+</div>
+<!----contenido-->
+
+
 <?php
 
 
@@ -785,9 +780,10 @@ END LICENSE CODE
 
 echo '</div>';
 
-/* Clean unneeded session variables */
+/* Clean unneeded session variables
 hesk_cleanSessionVars('hide');
 
 require_once(HESK_PATH . 'inc/footer.inc.php');
 exit();
+ */
 ?>

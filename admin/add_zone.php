@@ -95,8 +95,9 @@ if (isset($_POST['Crear'])) {
 
 
 ?>
-
+<!-- Inicio de formularios -->
 <div style="margin-left: 10px;" class="main__content settings">
+<!-- Inicio de formulario agregar zona -->
     <h1 class="h1est">Agregar</h1>
     <div class="table-wrap">
 
@@ -170,6 +171,7 @@ if (isset($_POST['Crear'])) {
     </div>
 </div>
 
+<!-- Script para datatable -->
 <script>
     $(document).ready(function() {
         $('#tablazonas').DataTable({

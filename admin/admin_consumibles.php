@@ -50,7 +50,110 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
 
 
+<div style="margin-left: 10px;" class="main__content settings">
+    <!-- Inicio de formulario agregar zona -->
+    <h1 class="h1est">Agregar Solicitud </h1>
+    <div class="table-wrap">
 
+        <form action="admin_consumibles.php" method="post" class="form <?php echo isset($_SESSION['iserror']) && count($_SESSION['iserror']) ? 'invalid' : ''; ?>" onsubmit='return validar()'>
+
+            <div class="form-group">
+
+                <label for="cliente">Cliente    </label>
+                <select autocomplete="off" type="text" name="cliente" id="cliente" class="form-control" placeholder="cliente" require="true">
+                    <?php
+                    $sql = "SELECT id,nombre FROM hesk_customers";
+                    $res = hesk_dbQuery($sql);
+                    while ($reg = hesk_dbFetchAssoc($res)) {
+                    ?>
+                        <option value="<?php echo "$reg[id]"; ?>"><?php echo "$reg[nombre]"; ?></option>
+                    <?php } ?>
+                </select>
+
+                <label for="consumible">Consumible</label>
+                <select name="consumible" id="consumible" class="form-control">
+                    <?php
+                    $sql = "SELECT id,consumible FROM hesk_descripcion_consumible";
+                    $res = hesk_dbQuery($sql);
+                    while ($reg = hesk_dbFetchAssoc($res)) {
+                    ?>
+                        <option value="<?php echo "$reg[id]"; ?>"><?php echo "$reg[consumible]"; ?></option>
+                    <?php } ?>
+                </select>
+
+                <label for="referencia">Referencia</label>
+                <select name="referencia" id="referencia" class="form-control">
+                    <?php
+                    $sql = "SELECT id,referencia FROM hesk_referencias_consumibles";
+                    $res = hesk_dbQuery($sql);
+                    while ($reg = hesk_dbFetchAssoc($res)) {
+                    ?>
+                        <option value="<?php echo "$reg[id]"; ?>"><?php echo "$reg[referencia]"; ?></option>
+                    <?php } ?>
+                </select>
+                <label for="cantidad">Cantidad</label>
+                <input type="number" name="cantidad" id="cantidad" placeholder="Cantidad" class="form-control">
+                <label for="fechaSolicitud">Fecha de solicitud</label>
+                <input type="date" name="fechSolicitud" id="fechSolicitud" class="form-control">
+                <label for="fechaEnvio">Fecha de envío</label>
+                <input type="date" name="fechaEnvio" id="fechaEnvio" class="form-control">
+                <label for="solicitante">Solicitante</label>
+                <input type="text" name="solicitante" id="solicitante" class="form-control">
+                <label for="estado">Estado</label>
+                <select name="estado" id="estado" class="form-control">
+                    <option value="0">Pendiente</option>
+                    <option value="1">Enviado</option>
+                </select>
+            </div>
+
+            <input name="Cargar" type="submit" value="Crear" class="btn btn-full">
+        </form>
+    </div>
+    <h1 class="h1est">Control de consumibles</h1>
+    <div class="table-wrap">
+        <table id="tablazonas" class="display">
+            <thead>
+                <tr>
+                    <th>Comodato</th>
+                    <th>Consumible</th>
+                    <th>Referencia</th>
+                    <th>Cantidad</th>
+                    <th>Fecha de solicitud</th>
+                    <th>Fecha de envio</th>
+                    <th>Días</th>
+                    <th>Solicitante</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php 
+                    
+                    $reg2 = hesk_dbFetchAssoc(hesk_dbQuery("SELECT NOW() AS fechaActual"));
+                    $sql = "SELECT * FROM hesk_consumibles";
+                    $res = hesk_dbQuery($sql);
+                    while ($reg = hesk_dbFetchAssoc($res)) {
+                ?>
+                    <tr>
+                        <td><?php echo "$reg[comodato]" ?></td>
+                        <td><?php echo "$reg[consumible]" ?></td>
+                        <td><?php echo "$reg[referencia]" ?></td>
+                        <td><?php echo "$reg[cantidad]" ?></td>
+                        <td><?php echo "$reg[fechaSolicitud]" ?></td>
+                        <td><?php echo "$reg[fechaEnvio]" ?></td>
+                        <td><?php echo $reg['fechaEnvio'] - $reg2['fechaActual']?></td>
+                        <td><?php echo "$reg[solicitante]" ?></td>
+                        <td><?php echo "$reg[estado]" ?></td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>...</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
 
 
 

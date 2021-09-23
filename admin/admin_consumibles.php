@@ -41,6 +41,37 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 ?>
 <script type="text/javascript" src="../js/validation.js"></script>
 
+<?php
+if (isset($_POST['Cargar'])) {
+    $sql = "INSERT INTO `hesk_consumibles` 
+    (
+    `comodato`, 
+    `consumible`, 
+    `referencia`, 
+    `cantidad`, 
+    `fechaSolicitud`, 
+    `fechaEnvio`, 
+    `solicitante`, 
+    `estado`
+    ) VALUES (
+    $_POST[cliente], 
+    $_POST[consumible], 
+    $_POST[referencia], 
+    $_POST[cantidad], 
+    '$_POST[fechaSolicitud]', 
+    '$_POST[fechaEnvio]', 
+    '$_POST[solicitante]', 
+    $_POST[estado]);";
+
+    echo $sql;
+
+    hesk_dbQuery($sql);
+
+    
+}
+
+?>
+
 <head>
     <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
     <script src="../js/jquery-3.5.1.js"></script>
@@ -59,7 +90,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
             <div class="form-group">
 
-                <label for="cliente">Cliente    </label>
+                <label for="cliente">Cliente </label>
                 <select autocomplete="off" type="text" name="cliente" id="cliente" class="form-control" placeholder="cliente" require="true">
                     <?php
                     $sql = "SELECT id,nombre FROM hesk_customers";
@@ -94,7 +125,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                 <label for="cantidad">Cantidad</label>
                 <input type="number" name="cantidad" id="cantidad" placeholder="Cantidad" class="form-control">
                 <label for="fechaSolicitud">Fecha de solicitud</label>
-                <input type="date" name="fechSolicitud" id="fechSolicitud" class="form-control">
+                <input type="date" name="fechaSolicitud" id="fechSolicitud" class="form-control">
                 <label for="fechaEnvio">Fecha de envío</label>
                 <input type="date" name="fechaEnvio" id="fechaEnvio" class="form-control">
                 <label for="solicitante">Solicitante</label>
@@ -123,32 +154,62 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                     <th>Días</th>
                     <th>Solicitante</th>
                     <th>Estado</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <?php 
-                    
-                    $reg2 = hesk_dbFetchAssoc(hesk_dbQuery("SELECT NOW() AS fechaActual"));
-                    $sql = "SELECT * FROM hesk_consumibles";
-                    $res = hesk_dbQuery($sql);
-                    while ($reg = hesk_dbFetchAssoc($res)) {
+                <?php
+
+                $reg2 = hesk_dbFetchAssoc(hesk_dbQuery("SELECT NOW() AS fechaActual"));
+                $sql = "SELECT 
+                    hcons.id as id,
+                    hcus.nombre as nombreCliente,
+                    hdc.consumible as consumible,
+                    hrc.referencia as referencia,
+                    hcons.cantidad as cantidad,
+                    hcons.fechaSolicitud as solicitud,
+                    hcons.fechaEnvio as envio,
+                    hcons.solicitante as solicitante,
+                    hcons.estado as estado,
+                    datediff(now(),hcons.fechaEnvio) as dias
+                    FROM hesk_consumibles hcons 
+                    JOIN hesk_customers hcus ON hcus.id = hcons.comodato
+                    JOIN hesk_descripcion_consumible hdc ON hdc.id = hcons.consumible
+                    JOIN hesk_referencias_consumibles hrc ON hrc.id = hcons.consumible";
+                $res = hesk_dbQuery($sql);
+                while ($reg = hesk_dbFetchAssoc($res)) {
                 ?>
                     <tr>
-                        <td><?php echo "$reg[comodato]" ?></td>
+                        <td><?php echo "$reg[nombreCliente]" ?></td>
                         <td><?php echo "$reg[consumible]" ?></td>
                         <td><?php echo "$reg[referencia]" ?></td>
                         <td><?php echo "$reg[cantidad]" ?></td>
-                        <td><?php echo "$reg[fechaSolicitud]" ?></td>
-                        <td><?php echo "$reg[fechaEnvio]" ?></td>
-                        <td><?php echo $reg['fechaEnvio'] - $reg2['fechaActual']?></td>
+                        <td><?php echo "$reg[solicitud]" ?></td>
+                        <td><?php echo "$reg[envio]" ?></td>
+                        <td><?php echo "$reg[dias]" ?></td>
                         <td><?php echo "$reg[solicitante]" ?></td>
-                        <td><?php echo "$reg[estado]" ?></td>
+                        <td><?php
+                            if ($reg["estado"]) {
+                                echo "Enviado";
+                            } else {
+                                echo "Pendiente";
+                            }
+                            ?></td>
                     </tr>
                 <?php } ?>
             </tbody>
             <tfoot>
                 <tr>
-                    <th>...</th>
+                    <th>Comodato</th>
+                    <th>Consumible</th>
+                    <th>Referencia</th>
+                    <th>Cantidad</th>
+                    <th>Fecha de solicitud</th>
+                    <th>Fecha de envio</th>
+                    <th>Días</th>
+                    <th>Solicitante</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
                 </tr>
             </tfoot>
         </table>

@@ -31,7 +31,7 @@ $calling_script = basename($_SERVER['PHP_SELF'], '.php');
                     <use xlink:href="<?php echo HESK_PATH; ?>img/sprite.svg#icon-menu"></use>
                 </svg>
             </button>
-            <a class="navbar__logo" href="admin_main.php">
+            <a class="navbar__logo" href="admin_main.php" style="width: 150px;">
                 <?php echo $hesklang['help_desk']; ?>
             </a>
         </div>
@@ -488,11 +488,11 @@ $calling_script = basename($_SERVER['PHP_SELF'], '.php');
 
 
 
-
+                <?php if ($_SESSION['isadmin']): ?>
                 <li class="listitem submenu <?php echo $open_menu; ?>">
                     <div class="listitem__icon">
                         <a class="icon icon-settings" href="#">
-                        <img src="<?php echo HESK_PATH; ?>img/map.png">
+                            <img src="<?php echo HESK_PATH; ?>img/map.png">
                             <svg class="icon icon-settings">
                                 <use xlink:href="<?php echo HESK_PATH; ?>img/sprite.svg#icon-zone"></use>
                             </svg>
@@ -521,7 +521,34 @@ $calling_script = basename($_SERVER['PHP_SELF'], '.php');
                         </ul>
                     </div>
                 </li>
+                <?php endif; ?>
+                <!---menu calendar --->
+                <li class="listitem submenu <?php echo $open_menu; ?>">
+                    <div class="listitem__icon">
+                        <a class="icon icon-settings" href="#">
+                        <img src="<?php echo HESK_PATH; ?>img/calendar2.png">
+                            <svg class="icon icon-settings">
+                                <use xlink:href="<?php echo HESK_PATH; ?>img/sprite.svg#icon-zone"></use>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="listitem__menu">
+                        <a href="#" class="listitem__caption">
+                            <?php echo "Calendario y reportes" ?>
+                        </a>
+                        <ul class="submenu__list">
+                            <li class="submenu__listitem ">
+                                <a href="Calendar.php">
+                                    calendaro
+                                </a>
+                            </li>
+                          
+                           
+                        </ul>
+                    </div>
+                </li>
 
+                <!--fin menu calrendar--->
 
 
 

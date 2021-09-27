@@ -47,6 +47,11 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
 </head>
 
+<?php if (isset($_POST['asignar'])) {
+    $sql = "INSERT INTO hesk_customers_users (idcustomer,idencargado) VALUES ($_POST[customer],$_POST[encargado])";
+    hesk_dbQuery($sql);
+} ?>
+
 <div style="margin-left: 10px;" class="main__content settings">
 
     <h1 class="h1est">Asignamiento de clientes y encargados</h1>
@@ -69,7 +74,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                 <select style="margin-top: 10px;" name="encargado" id="encargado" class="form-control">
                     <option disabled selected value="0">Encargado</option>
                     <?php
-                    $sql = "SELECT id, name FROM hesk_users";
+                    $sql = "SELECT id, name FROM hesk_users where rol = 1";
                     $res = hesk_dbQuery($sql);
                     while ($reg = hesk_dbFetchAssoc($res)) {
                         if ($reg['id'] == 0) {
@@ -82,7 +87,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                     ?>
                 </select>
 
-                <input style="margin-top: 10px;" type="submit" value="Enviar" class="btnb btnb-primary">
+                <input style="margin-top: 10px;" name="asignar" type="submit" value="Enviar" class="btnb btnb-primary">
 
             </div>
         </form>

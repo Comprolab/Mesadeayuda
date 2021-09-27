@@ -626,7 +626,7 @@ function hesk_verifyGoto()
 	// Default redirect URL
 
 	// Finding the rol of the user...
-	$resultado = hesk_dbQuery("SELECT `rol` FROM hesk_users WHERE `id`='".intval($_SESSION['id'])."' ");
+	$resultado = hesk_dbQuery("SELECT `rol`,`ubicacion` FROM hesk_users WHERE `id`='".intval($_SESSION['id'])."' ");
 	$row = hesk_dbFetchAssoc($resultado);
 	/* if ($row['rol'] == 2) {
 		$url_default = 'custo.php';
@@ -635,12 +635,14 @@ function hesk_verifyGoto()
 	} */
 
 	// Redirecting rol depending...
+	$res2 = hesk_dbQuery("SELECT `ubicacion` FROM hesk_users WHERE `id`='".intval($_SESSION['id'])."'");
 
 	switch($row['rol']){
 		case 1:
 			$url_default = 'admin/admin_main.php';
 			break;
 		case 2:
+			$_SESSION['ubicacion'] = $row['ubicacion'];
 			$url_default = 'custo.php';
 			break;
 	}

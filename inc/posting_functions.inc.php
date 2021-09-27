@@ -70,6 +70,8 @@ function hesk_newTicket($ticket)
     }
 
 	
+	
+
 
 	// Insert ticket into database
 	hesk_dbQuery("

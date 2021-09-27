@@ -1190,8 +1190,8 @@ $options = array(
                      
                      ?>
                      </p>
-                    <?php if ($ticket['category']==6):?>
-                        <button class="btnb btnb-primary">HOLA</button>
+                    <?php if ($ticket['category']==1):?>
+                        <a href="admin_consumibles.php" class="btnb btnb-primary">Consumibles</a>
                     <?php endif; ?>
                 </div>
             </div>

@@ -137,8 +137,8 @@ hesk_isLoggedIn();
                                 <input type="text" name="name" class="form-control <?php if (in_array('name', $_SESSION['iserror'])) {
                                                                                         echo 'isEerror';
                                                                                     } ?>" maxlength="50" value="<?php if (isset($_SESSION['c_name'])) {
-                                                                                                                                                                                        echo stripslashes(hesk_input($_SESSION['c_name']));
-                                                                                                                                                                                    } ?>" required>
+                                                                                                                    echo stripslashes(hesk_input($_SESSION['c_name']));
+                                                                                                                } ?>" required>
                             </div>
                             <div class="form-group">
                                 <label class="label <?php if ($hesk_settings['require_email']) { ?>required<?php } ?>"><?php echo $hesklang['email']; ?>:</label>
@@ -147,10 +147,10 @@ hesk_isLoggedIn();
                                                                                                                                 } elseif (in_array('email', $_SESSION['isnotice'])) {
                                                                                                                                     echo 'isNotice';
                                                                                                                                 } ?>" name="email" id="email" maxlength="1000" value="<?php if (isset($_SESSION['c_email'])) {
-                                                                                                                                                                                                                                                                                                                                echo stripslashes(hesk_input($_SESSION['c_email']));
-                                                                                                                                                                                                                                                                                                                            } ?>" <?php if ($hesk_settings['detect_typos']) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                    echo ' onblur="HESK_FUNCTIONS.suggestEmail(\'email\', \'email_suggestions\', 0)"';
-                                                                                                                                                                                                                                                                                                                                                                                                                                } ?> <?php if ($hesk_settings['require_email']) { ?>required<?php } ?>>
+                                                                                                                                                                                            echo stripslashes(hesk_input($_SESSION['c_email']));
+                                                                                                                                                                                        } ?>" <?php if ($hesk_settings['detect_typos']) {
+                                                                                                                                                                                                                                                                                                                                        echo ' onblur="HESK_FUNCTIONS.suggestEmail(\'email\', \'email_suggestions\', 0)"';
+                                                                                                                                                                                                                                                                                                                                    } ?> <?php if ($hesk_settings['require_email']) { ?>required<?php } ?>>
                                 <div id="email_suggestions"></div>
                             </div>
                             <?php if ($hesk_settings['confirm_email']) : ?>
@@ -161,8 +161,8 @@ hesk_isLoggedIn();
                                                                                                                                     } elseif (in_array('email2', $_SESSION['isnotice'])) {
                                                                                                                                         echo 'isNotice';
                                                                                                                                     } ?>" name="email2" id="email2" maxlength="1000" value="<?php if (isset($_SESSION['c_email2'])) {
-                                                                                                                                                                                                                                                                                                                                        echo stripslashes(hesk_input($_SESSION['c_email2']));
-                                                                                                                                                                                                                                                                                                                                    } ?>" <?php if ($hesk_settings['require_email']) { ?>required<?php } ?>>
+                                                                                                                                                                                                echo stripslashes(hesk_input($_SESSION['c_email2']));
+                                                                                                                                                                                            } ?>" <?php if ($hesk_settings['require_email']) { ?>required<?php } ?>>
                                 </div>
                             <?php endif; ?>
                         </section>
@@ -192,8 +192,9 @@ hesk_isLoggedIn();
                                     </select>
                                 </div>
                             </section>
+                            <!-- 
                             <div class="form-group">
-                                <select name="ticketzone" id="ticketzone" class="form-control">
+                                <select name="ticketzone" disabled id="ticketzone" class="form-control">
                                     <?php
                                     $sql = "SELECT id,nombre FROM hesk_customers";
                                     $res = hesk_dbQuery($sql);
@@ -203,6 +204,10 @@ hesk_isLoggedIn();
                                     }
                                     ?>
                                 </select>
+                            </div>
+                                -->
+                            <div class="form-group">
+                                <input type="text" name="ticketzone" id="ticketzone" class="form-control" value="<?php echo $_SESSION['ubicacion'] ?>" hidden>
                             </div>
                         <?php
                         endif;
@@ -226,8 +231,8 @@ hesk_isLoggedIn();
                                     <input type="text" class="form-control <?php if (in_array('subject', $_SESSION['iserror'])) {
                                                                                 echo 'isError';
                                                                             } ?>" name="subject" maxlength="70" value="<?php if (isset($_SESSION['c_subject'])) {
-                                                                                                                                                                                                echo stripslashes(hesk_input($_SESSION['c_subject']));
-                                                                                                                                                                                            } ?>" <?php if ($hesk_settings['require_subject']) { ?>required<?php } ?>>
+                                                                                                                            echo stripslashes(hesk_input($_SESSION['c_subject']));
+                                                                                                                        } ?>" <?php if ($hesk_settings['require_subject']) { ?>required<?php } ?>>
                                 </div>
                             <?php
                             endif;
@@ -239,8 +244,8 @@ hesk_isLoggedIn();
                                     <textarea class="form-control <?php if (in_array('message', $_SESSION['iserror'])) {
                                                                         echo 'isError';
                                                                     } ?>" name="message" rows="12" cols="60" <?php if ($hesk_settings['require_message']) { ?>required<?php } ?>><?php if (isset($_SESSION['c_message'])) {
-                                                                                                                                                                                                                                                        echo stripslashes(hesk_input($_SESSION['c_message']));
-                                                                                                                                                                                                                                                    } ?></textarea>
+                                                                                                                                                                                        echo stripslashes(hesk_input($_SESSION['c_message']));
+                                                                                                                                                                                    } ?></textarea>
                                     <?php if (has_public_kb() && $hesk_settings['kb_recommendanswers']) : ?>
                                         <div class="kb-suggestions" style="margin: 0 auto; width: 100%; max-width: 752px; display: none">
                                             <div class="alert">

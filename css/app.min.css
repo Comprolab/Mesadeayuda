@@ -8599,10 +8599,10 @@ p.rate {
     color: black
 }
 .navbar__logo {
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 900;
     color: rgba(255, 255, 255, 0.55);
-    width: 250px;
+    width: 200px;
     height: auto;
 }
 .listitem {
@@ -11945,3 +11945,6 @@ p {
     letter-spacing: .1px;
 }
 
+select.form-control{
+    height: 40px; border-radius: 50px; border-color: black;
+}

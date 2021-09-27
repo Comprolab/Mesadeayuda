@@ -1191,7 +1191,7 @@ $options = array(
                      ?>
                      </p>
                     <?php if ($ticket['category']==1):?>
-                        <a href="admin_consumibles.php" class="btnb btnb-primary">HOLA</a>
+                        <a href="admin_consumibles.php" class="btnb btnb-primary">Consumibles</a>
                     <?php endif; ?>
                 </div>
             </div>

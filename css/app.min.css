@@ -11945,3 +11945,6 @@ p {
     letter-spacing: .1px;
 }
 
+select.form-control{
+    height: 40px; border-radius: 50px; border-color: black;
+}

@@ -188,13 +188,19 @@ if (isset($_POST['Cargar'])) {
                         <td><?php echo "$reg[envio]" ?></td>
                         <td><?php echo "$reg[dias]" ?></td>
                         <td><?php echo "$reg[solicitante]" ?></td>
-                        <td><?php
+                        <td><a href=""><?php
                             if ($reg["estado"]) {
                                 echo "Enviado";
                             } else {
                                 echo "Pendiente";
                             }
-                            ?></td>
+                            ?></a>
+                        </td>
+                        <td>
+                            <a href=""><i class="far fa-trash-alt" style="color: red;"></i></a>
+                            <br>
+                            <a href=""><i class="far fa-edit" style="color: green;"></i></a>
+                        </td>
                     </tr>
                 <?php } ?>
             </tbody>

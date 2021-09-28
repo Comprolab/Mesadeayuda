@@ -36,11 +36,13 @@ function Header()
 function Footer()
 {
     // Posición: a 1,5 cm del final
-    $this->SetY(-15);
+    $this->SetY(-40);
     // Arial italic 8
-    $this->SetFont('Arial','B',14);
+    $this->SetFont('Arial','B',8);
     // Número de página
-    $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+    $this->Cell(0,10,'Calle 106 No.54-63-CONMUTADOR PBX:742 6486 - Emai:sistemas@comprolab.com '.$this->PageNo().'page',0,1,'C');
+    $this->SetX(100);
+    $this->Write(5,'Bogota D,C',0,1);
 }
 }
 
@@ -81,9 +83,39 @@ $pdf->SetX(20);
 $pdf->SetFont('HELVETICA','',9);
 $pdf->Cell(180, 5, 'MANTENIMIENTO',1,0, 'C');
 
-
-
+#seccion 3 
+$pdf->Ln(10);
+$pdf->SetFont('HELVETICA','B',9);
+$pdf->SetX(20);
+$pdf->Cell(180,10 , 'Situacion reportada:',1,1);
+$pdf->Ln(10);
+$pdf->SetX(20);
+$pdf->Cell(180,10 , 'Situacion observda:',1,0);
+$pdf->Ln(15);
+$pdf->SetX(20);
+$pdf->Cell(180, 10 ,'labor realizada: ' ,1,1);
+$pdf->Ln(10);
+$pdf->SetX(20);
+$pdf->Cell(180, 10 ,'Estado del equipo al finalizar el equipo:  ' ,1,1);
+$pdf->Ln(10);
+$pdf->SetX(20);
+$pdf->Cell(180, 20 ,'Recomendaciones :  ' ,1,1);
+$pdf->Ln(10);
+$pdf->SetX(20);
+$pdf->Cell(180, 5 ,'Formas de pago :  ' ,1,1);
+$pdf->Ln(10);
+$pdf->SetX(20);
+$pdf->Cell(90, 15 ,'Firma y sello del cliente :  ' ,1,0 , 'T');
+$pdf->Cell(90, 15 ,'Firma ingeniero de comprolab S.A.S: ' ,1,1 , 'T');
+$pdf->SetX(20);
+$pdf->Cell(90,5 ,'Nombre : ' ,1,0, 'T');
+$pdf->Cell(90, 5 ,'Nombre: ' ,1,1 , 'T');
+$pdf->SetX(20);
+$pdf->Cell(90, 5 ,'Cargo: ' ,1,0, 'T');
+$pdf->Cell(90, 5 ,'cargo: ' ,1,0 , 'T');
 $pdf->Output('I', 'Reporte de servicio.pdf');
+
+
 
 
 ?>

@@ -59,6 +59,9 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
     $fechaFinal    = $_POST["fechaFinal"];
     $estado        = $_POST["estado"];
     $localizacion  = $_POST["localizacion"];
+    $clase_de_servicio = $_POST["clase_de_servicio"];
+    $situacion_reportada = $_POST["situacion_reportada"];
+    $situacion_obserbada = $_POST["situacion_obserbada"];
     $descripcion   = $_POST["descripcion"];
     $estadoEquipo  = $_POST["estadoEquipo"];
     $recomendacion = $_POST["recomendacion"];
@@ -74,10 +77,14 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
      #'$estadoEquipo', '$recomendacion', '$formaPago', $profecional, '$cargo', $nombreCliente, '$direccion', $numero )";
     
 
-    $query2 = "INSERT INTO `hesk_reporte_de_servicio` ( `nombreReporte`, `asignado`, `fechaInicio`, `fechaFinal`, `estado`, `localizacion`, `descripcion`, `estadoEquipo`, `recomendacion`, `formaPago`, `profecional`, `cargo`, `nombreCliente`, `direccion`, `numero`) 
-    VALUES ( '$nombreReporte', '$asignado', '$fechaInicio', '$fechaFinal', '$estado', '$localizacion', '$descripcion', '$estadoEquipo', '$recomendacion', '$formaPago', '$profecional', '$cargo', '$nombreCliente', '$direccion', '$numero');";
-     echo $query;
-     hesk_dbQuery($query2);
+   // $query2 = "INSERT INTO `hesk_reporte_de_servicio` ( `nombreReporte`, `asignado`, `fechaInicio`, `fechaFinal`, `estado`, `localizacion`, `descripcion`, `estadoEquipo`, `recomendacion`, `formaPago`, `profecional`, `cargo`, `nombreCliente`, `direccion`, `numero`) 
+   //7 VALUES ( '$nombreReporte', '$asignado', '$fechaInicio', '$fechaFinal', '$estado', '$localizacion', '$descripcion', '$estadoEquipo', '$recomendacion', '$formaPago', '$profecional', '$cargo', '$nombreCliente', '$direccion', '$numero');";
+     //echo $query;
+     $query3 ="INSERT INTO `hesk_reporte_de_servicio` ( `nombreReporte`, `asignado`, `fechaInicio`, `fechaFinal`, `estado`, `localizacion`, `clase_de_servicio`, `situacion_reportada`, `situacion_obserbada`, `descripcion`, `estadoEquipo`, `recomendacion`, `formaPago`,
+      `profecional`, `cargo`, `nombreCliente`, `direccion`, `numero`) VALUES ( '$nombreReporte', '$asignado ', '$fechaInicio', '$fechaFinal', '$estado ', '$localizacion ', ' $clase_de_servicio', '$situacion_reportada', '$situacion_obserbada', '$descripcion',
+       '$estadoEquipo', '$recomendacion', '$formaPago', '$profecional', '$cargo ', '$nombreCliente', '$direccion ', '$numero ')";
+     hesk_dbQuery($query3);
+     
 
      
      
@@ -97,31 +104,33 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 <div style="margin-left: 10px;" class="main__content settings">
 
     <h1 class="h1est">Agregar</h1>
-    <div  class="table-wrap">
+    <div class="table-wrap">
 
-        <form  action="reportes.php" method="post" class="form <?php echo isset($_SESSION['iserror']) && count($_SESSION['iserror']) ? 'invalid' : ''; ?>" onsubmit='return validar()'>
+        <form action="reportes.php" method="post"
+            class="form <?php echo isset($_SESSION['iserror']) && count($_SESSION['iserror']) ? 'invalid' : ''; ?>"
+            onsubmit='return validar()'>
 
-        <div class="form-group">
-                    <label>
-                        <span>Tipo de reporte </span>
-                       
-                        <div class="form-group">
-                <select name="nombreReporte" id="nombreReporte" class="form-control" style="border: 90%;">}
-                <option value="Reporte de servicio">Reporte de servicio</option>
-             
-                </select>
-                    </label>
-                   
-                </div>
+            <div class="form-group">
+                <label>
+                    <span>Tipo de reporte </span>
 
-                <div class="form-group">
-                    <label>
-                        <span>Asignado </span>
-                 
-                    </label>
-                    <select name="asignado" id="asignado" class="form-control" style="border: 90%;">}
-       
-                  <?php
+                    <div class="form-group">
+                        <select name="nombreReporte" id="nombreReporte" class="form-control" style="border: 90%;">}
+                            <option value="Reporte de servicio">Reporte de servicio</option>
+
+                        </select>
+                </label>
+
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <span>Asignado </span>
+
+                </label>
+                <select name="asignado" id="asignado" class="form-control" style="border: 90%;">}
+
+                    <?php
                         $sql = "SELECT id,name FROM hesk_users  WHERE  rol = 1   " ;
                         $res = hesk_dbQuery($sql);
                         echo "<option disabled='true' value='0' selected></option>";
@@ -129,49 +138,49 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                         while ($reg = hesk_dbFetchAssoc($res)) {
                             echo "<option value='$reg[id]'>$reg[name]</option>";
                         }
-                    ?> 
+                    ?>
                 </select>
-                    </label>
-                </div>
+                </label>
+            </div>
 
-                <div class="form-group">
-                    <label>
-                        <span>Fecha de inicio </span>
-                    
-                    </label>
-                
-                    <input id="fechaInicio" type="date" class="form-control" name="fechaInicio" maxlength="255" >
-             </div>
+            <div class="form-group">
+                <label>
+                    <span>Fecha de inicio </span>
 
-                <div class="form-group">
-                    <label>
-                        <span>Fecha final </span>
-                     
-                    </label>
-                  
-                    <input type="date" class="form-control" name="fechaFinal" maxlength="255" >
-                    </div>
+                </label>
 
-                <div class="form-group">
-                    <label>
-                        <span>Estado de servicio </span>
-         
-                    </label>
-                    <select name="estado" id="estado" class="form-control" style="border: 90%;">}
-                <option value="Realizado">Realizado</option>
-                <option value="Pendiente">Pendiente </option>
-                <option value="Aplazado">Aplazado </option>
-                <option value="En operacion">En operacion </option>    
-                <option value="Planeado">Planeado</option>
+                <input id="fechaInicio" type="date" class="form-control" name="fechaInicio" maxlength="255">
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <span>Fecha final </span>
+
+                </label>
+
+                <input type="date" class="form-control" name="fechaFinal" maxlength="255">
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <span>Estado de servicio </span>
+
+                </label>
+                <select name="estado" id="estado" class="form-control" style="border: 90%;">}
+                    <option value="Realizado">Realizado</option>
+                    <option value="Pendiente">Pendiente </option>
+                    <option value="Aplazado">Aplazado </option>
+                    <option value="En operacion">En operacion </option>
+                    <option value="Planeado">Planeado</option>
                 </select>
-                </div>
+            </div>
 
-                <div class="form-group">
-                    <label>
-                        <span>Localizacion</span>
-                    
-                    </label>
-                    <select name="localizacion" id="localizacion" class="form-control">
+            <div class="form-group">
+                <label>
+                    <span>Localizacion</span>
+
+                </label>
+                <select name="localizacion" id="localizacion" class="form-control">
                     <?php 
                         $sql = "SELECT id,nombre FROM hesk_zones";
                         $res = hesk_dbQuery($sql);
@@ -182,60 +191,98 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                         }
                     ?>
                 </select>
-                </div>
+            </div>
+            <div class="form-group">
+                <label>
+                    <span>Clase de servicio </span>
 
-                <div class="form-group">
-                    <label>
-                        <span>Descripcion de servicio</span>
-                 
-                    </label>
-                   
-                    <textarea id="descripcion" style="width: 100%;" type="textarea" class="form-control" name="descripcion" maxlength="255" value="" ></textarea>
-                </div>
-
-
-                <div class="form-group">
-                    <label>
-                        <span>Estado de equipo</span>
-               
-                    </label>
-                    <textarea style="width: 100%;" type="textarea" class="form-control" id="estadoEquipo" name="estadoEquipo" maxlength="255" value="" ></textarea>
-                </div>
-
-                
-                <div class="form-group">
-                    <label>
-                        <span>Recomendacion</span>
-                  
-                    </label>
-                    <textarea style="width: 100%;" type="textarea" class="form-control" id="recomendacion" name="recomendacion" maxlength="255" value="" ></textarea>
-                </div>
-
-
-                <div class="form-group">
-                    <label>
-                        <span>Forma de pago </span>
-                    
-                    </label>
-                    <select id="formaPago" name="formaPago" id="formaPago" class="form-control" style="border: 90%;">
-                <option value=""></option>
-                <option value="Comodato">Comodato</option>
-                <option value="Credito">Credito</option>
-                <option value="Efectivo">Efectivo </option>
-                <option value="Devito">Devito </option>    
-          
+                </label>
+                <select name="clase_de_servicio" id="clase_de_servicio" class="form-control" style="border: 90%;">}
+                    <option value=""></option>
+                    <option value="Mantenimiento">Mantenimiento</option>
+                    <option value="reparacion">reparacion </option>
+                    <option value="Visita">Visita </option>
+                    <option value="preventivo">preventivo </option>
+                    <option value="Comodato">Comodato</option>
                 </select>
-                </div>
+            </div>
 
 
-                <div class="form-group">
-                    <label>
-                        <span>Profecional</span>
-                      
-                    </label>
-                    <select id="profecional" name="profecional" id="zona" class="form-control" style="border: 90%;">}
-       
-                  <?php
+            <div class="form-group">
+                <label>
+                    <span>Situacion reportada</span>
+
+                </label>
+
+                <textarea id="situacion_reportada" style="width: 100%;" type="textarea" class="form-control"
+                    name="situacion_reportada" maxlength="255" value=""></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <span>situacion obserbada</span>
+
+                </label>
+
+                <textarea id="situacion_obserbada" style="width: 100%;" type="textarea" class="form-control"
+                    name="situacion_obserbada" maxlength="255" value=""></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <span>Labor realizada</span>
+
+                </label>
+
+                <textarea id="descripcion" style="width: 100%;" type="textarea" class="form-control" name="descripcion"
+                    maxlength="255" value=""></textarea>
+            </div>
+
+
+            <div class="form-group">
+                <label>
+                    <span>Estado de equipo</span>
+
+                </label>
+                <textarea style="width: 100%;" type="textarea" class="form-control" id="estadoEquipo"
+                    name="estadoEquipo" maxlength="255" value=""></textarea>
+            </div>
+
+
+            <div class="form-group">
+                <label>
+                    <span>Recomendacion</span>
+
+                </label>
+                <textarea style="width: 100%;" type="textarea" class="form-control" id="recomendacion"
+                    name="recomendacion" maxlength="255" value=""></textarea>
+            </div>
+
+
+            <div class="form-group">
+                <label>
+                    <span>Forma de pago </span>
+
+                </label>
+                <select id="formaPago" name="formaPago" id="formaPago" class="form-control" style="border: 90%;">
+                    <option value=""></option>
+                    <option value="Comodato">Comodato</option>
+                    <option value="Credito">Credito</option>
+                    <option value="Efectivo">Efectivo </option>
+                    <option value="Devito">Devito </option>
+
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label>
+                    <span>Profecional</span>
+
+                </label>
+                <select id="profecional" name="profecional" id="zona" class="form-control" style="border: 90%;">}
+
+                    <?php
                         $sql = "SELECT id,name FROM hesk_users  WHERE  rol = 1   " ;
                         $res = hesk_dbQuery($sql);
                         echo "<option disabled='true' value='0' selected></option>";
@@ -243,71 +290,71 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                         while ($reg = hesk_dbFetchAssoc($res)) {
                             echo "<option value='$reg[id]'>$reg[name]</option>";
                         }
-                    ?> 
+                    ?>
                 </select>
-                </div>
+            </div>
 
 
-                <div class="form-group">
-                    <label>
-                        <span>Cargo</span>
-                    
-                    </label>
-                    <select name="cargo" id="cargo" class="form-control" style="border: 90%;">
+            <div class="form-group">
+                <label>
+                    <span>Cargo</span>
+
+                </label>
+                <select name="cargo" id="cargo" class="form-control" style="border: 90%;">
                     <option value="value1"></option>
-                <option value="Ingeniero de sistemas ">Ingeniero de sistemas </option>
-                <option value="Tecnico de servicio">Tecnico de servicio</option>
-                <option value="Ingeniero electrico">Ingeniero electrico </option>
-                <option value="Ingeniero de zona ">Ingeniero de zona  </option>    
-                <option value="Bacteriologo ">Bacteriologo </option> 
-          
+                    <option value="Ingeniero de sistemas ">Ingeniero de sistemas </option>
+                    <option value="Tecnico de servicio">Tecnico de servicio</option>
+                    <option value="Ingeniero electrico">Ingeniero electrico </option>
+                    <option value="Ingeniero de zona ">Ingeniero de zona </option>
+                    <option value="Bacteriologo ">Bacteriologo </option>
+
                 </select>
-                </div>
+            </div>
 
 
 
-                <div class="form-group">
-                    <label>
-                        <span>Nombre del cliente </span>
-                  
-                    </label>
-                    <select name="nombreCliente" id="nombreCliente" class="form-control">
-                    <option  value="Cliente">Cliente</option>
+            <div class="form-group">
+                <label>
+                    <span>Nombre del cliente </span>
+
+                </label>
+                <select name="nombreCliente" id="nombreCliente" class="form-control">
+                    <option value="Cliente">Cliente</option>
                     <?php
                     $sql = "SELECT id,nombre FROM hesk_customers";
                     $res = hesk_dbQuery($sql);
                     while ($reg = hesk_dbFetchAssoc($res)) {
                     ?>
-                        <option value="<?php echo $reg['id'] ?>"><?php echo $reg['nombre'] ?></option>
+                    <option value="<?php echo $reg['id'] ?>"><?php echo $reg['nombre'] ?></option>
                     <?php
                     }
-                    ?>  
+                    ?>
                 </select>
-                </div>
+            </div>
 
 
 
-                <div class="form-group">
-                    <label>
-                        <span>Direccion</span>
-                     
-                    </label>
-                    <input type="text" class="form-control" id="direccion" name="direccion" maxlength="255" value="">
-                </div>
+            <div class="form-group">
+                <label>
+                    <span>Direccion</span>
+
+                </label>
+                <input type="text" class="form-control" id="direccion" name="direccion" maxlength="255" value="">
+            </div>
 
 
-                <div class="form-group">
-                    <label>
-                        <span>Numero de telefono del cliente </span>
-                      
-                    </label>
-                    <input type="text" class="form-control" id="numero" name="numero" maxlength="255" value="">
-                </div>
+            <div class="form-group">
+                <label>
+                    <span>Numero de telefono del cliente </span>
+
+                </label>
+                <input type="text" class="form-control" id="numero" name="numero" maxlength="255" value="">
+            </div>
 
 
-                
 
-                
+
+
 
 
             <input id="Crear" name="Crear " type="submit" value="Crear Reporte" class="btn btn-full">
@@ -315,8 +362,8 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
     </div>
 
 
-<!-- Script para datatable -->
-<script>
+    <!-- Script para datatable -->
+    <script>
     $(document).ready(function() {
         $('#tablazonas').DataTable({
             "language": {
@@ -329,8 +376,8 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
             "pagingType": "full_numbers"
         });
     });
-</script>
-<?php require_once(HESK_PATH . 'inc/footer.inc.php'); ?>
+    </script>
+    <?php require_once(HESK_PATH . 'inc/footer.inc.php'); ?>
 
-<script type="text/javascript" src="../js/no-resend.js"> </script>
-<script type="text/javascript" src="../js/validation.js"> </script>
+    <script type="text/javascript" src="../js/no-resend.js"> </script>
+    <script type="text/javascript" src="../js/validation.js"> </script>

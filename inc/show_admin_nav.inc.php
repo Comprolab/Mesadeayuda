@@ -297,6 +297,15 @@ $calling_script = basename($_SERVER['PHP_SELF'], '.php');
                                     </li>
                                 <?php
                                 }
+                                if (hesk_checkPermission('can_man_settings', 0)) {
+                                    ?>
+                                        <li class="submenu__listitem <?php if ($calling_script === 'module_escalate') { ?>current<?php } ?>">
+                                            <a href="reportes.php">
+                                                <?php echo "Reporte de servicio" ?>
+                                            </a>
+                                        </li>
+                                    <?php
+                                    }
                                 ?>
                             </ul>
                         </div>

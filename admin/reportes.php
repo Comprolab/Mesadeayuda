@@ -75,15 +75,15 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
      $query3 ="INSERT INTO `hesk_reporte_de_servicio` ( `nombreReporte`, `asignado`, `fechaInicio`, `fechaFinal`, `estado`, `localizacion`, `clase_de_servicio`, `situacion_reportada`, `situacion_obserbada`, `descripcion`, `estadoEquipo`, `recomendacion`, `formaPago`,
       `profecional`, `cargo`, `nombreCliente`, `direccion`, `numero`) VALUES ( '$nombreReporte', '$asignado ', '$fechaInicio', '$fechaFinal', '$estado ', '$localizacion ', ' $clase_de_servicio', '$situacion_reportada', '$situacion_obserbada', '$descripcion',
        '$estadoEquipo', '$recomendacion', '$formaPago', '$profecional', '$cargo ', '$nombreCliente', '$direccion ', '$numero ')";
-     hesk_dbQuery($query3);
+      hesk_dbQuery($query3);
      
-
-     
+       
+    
      
     }
 
    
-
+    
 
 
 

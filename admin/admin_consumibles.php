@@ -66,8 +66,6 @@ if (isset($_POST['Cargar'])) {
     echo $sql;
 
     hesk_dbQuery($sql);
-
-    
 }
 
 ?>
@@ -81,7 +79,7 @@ if (isset($_POST['Cargar'])) {
 
 
 
-<div style="margin-left: 10px;" class="main__content settings">
+<div style="margin-left: 10px; padding-right: 50px;" class="main__content settings" >
     <!-- Inicio de formulario agregar zona -->
     <h1 class="h1est">Agregar Solicitud </h1>
     <div class="table-wrap">
@@ -141,7 +139,7 @@ if (isset($_POST['Cargar'])) {
         </form>
     </div>
     <h1 class="h1est">Control de consumibles</h1>
-    <div class="table-wrap">
+    <div class="table-wrap" >
         <table id="tablazonas" class="display">
             <thead>
                 <tr>
@@ -188,18 +186,24 @@ if (isset($_POST['Cargar'])) {
                         <td><?php echo "$reg[envio]" ?></td>
                         <td><?php echo "$reg[dias]" ?></td>
                         <td><?php echo "$reg[solicitante]" ?></td>
-                        <td><a href=""><?php
-                            if ($reg["estado"]) {
-                                echo "Enviado";
-                            } else {
-                                echo "Pendiente";
-                            }
-                            ?></a>
+                        <td><button style="width: 60px;" href="#" id="estadoT" onclick="changeStatus(<?php echo $reg['id'] ?>);" val="<?php echo $reg['id'] ?>"><?php
+                                                                                                                    if ($reg["estado"]) {
+                                                                                                                        echo "Enviado";
+                                                                                                                    } else {
+                                                                                                                        echo "Pendiente";
+                                                                                                                    }
+                                                                                                                    ?><br> </button>
                         </td>
-                        <td>
-                            <a href=""><i class="far fa-trash-alt" style="color: red;"></i></a>
+                        <td style="text-align: center;">
+                            <a href="" class="tooltip">
+                                <i class="far fa-trash-alt" style="color: red;"></i>
+                                <span class="tooltiptext">Eliminar registro</span>
+                            </a>
                             <br>
-                            <a href=""><i class="far fa-edit" style="color: green;"></i></a>
+                            <a href="" class="tooltip">
+                                <i class="far fa-edit" style="color: green;"></i>
+                                <span class="tooltiptext" id="tooltipleft">Editar registro</span>
+                            </a>
                         </td>
                     </tr>
                 <?php } ?>
@@ -237,6 +241,24 @@ if (isset($_POST['Cargar'])) {
             "pagingType": "full_numbers"
         });
     });
+</script>
+
+<script>
+    function changeStatus(consu) {
+        $.ajax({
+            type: "POST",
+            url: "change_consumible_status.php",
+            data: {
+                idC: consu
+            },
+            success: function(data) {
+                location.reload();
+            }
+        });
+    };
+
+
+    
 </script>
 <?php require_once(HESK_PATH . 'inc/footer.inc.php'); ?>
 

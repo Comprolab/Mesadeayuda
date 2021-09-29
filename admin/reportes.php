@@ -52,34 +52,26 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 <?php
 
 
- 
-    $nombreReporte = $_POST["nombreReporte"];
-    $asignado      = $_POST["asignado"];
-    $fechaInicio   = $_POST["fechaInicio"];
-    $fechaFinal    = $_POST["fechaFinal"];
-    $estado        = $_POST["estado"];
-    $localizacion  = $_POST["localizacion"];
-    $clase_de_servicio = $_POST["clase_de_servicio"];
+ if(isset($_POST['Crear'])){
+    $nombreReporte       = $_POST["nombreReporte"];
+    $asignado            = $_POST["asignado"];
+    $fechaInicio         = $_POST["fechaInicio"];
+    $fechaFinal          = $_POST["fechaFinal"];
+    $estado              = $_POST["estado"];
+    $localizacion        = $_POST["localizacion"];
+    $clase_de_servicio   = $_POST["clase_de_servicio"];
     $situacion_reportada = $_POST["situacion_reportada"];
     $situacion_obserbada = $_POST["situacion_obserbada"];
-    $descripcion   = $_POST["descripcion"];
-    $estadoEquipo  = $_POST["estadoEquipo"];
-    $recomendacion = $_POST["recomendacion"];
-    $formaPago     = $_POST["formaPago"];
-    $profecional   = $_POST["profecional"];
-    $cargo         = $_POST["cargo"];
-    $nombreCliente = $_POST["nombreCliente"];
-    $direccion     = $_POST["direccion"];
-    $numero        = $_POST["numero"];
-     
-    #$query = "INSERT INTO hesk_reporte_de_servicio (nombreReporte, asignado, fechaInicio, fechaFinal, 
-     #estado, localizacion, descripcion , estadoEquipo, recomendacion, formaPago, profecional, cargo, nombreCliente, direccion, numero ) VALUES('$nombreReporte', '$asignado', '$fechaInicio', '$fechaFinal', '$estado', $localizacion, '$descripcion',
-     #'$estadoEquipo', '$recomendacion', '$formaPago', $profecional, '$cargo', $nombreCliente, '$direccion', $numero )";
-    
+    $descripcion         = $_POST["descripcion"];
+    $estadoEquipo        = $_POST["estadoEquipo"];
+    $recomendacion       =  $_POST["recomendacion"];
+    $formaPago           = $_POST["formaPago"];
+    $profecional         = $_POST["profecional"];
+    $cargo               = $_POST["cargo"];
+    $nombreCliente       = $_POST["nombreCliente"];
+    $direccion           = $_POST["direccion"];
+    $numero               = $_POST["numero"];
 
-   // $query2 = "INSERT INTO `hesk_reporte_de_servicio` ( `nombreReporte`, `asignado`, `fechaInicio`, `fechaFinal`, `estado`, `localizacion`, `descripcion`, `estadoEquipo`, `recomendacion`, `formaPago`, `profecional`, `cargo`, `nombreCliente`, `direccion`, `numero`) 
-   //7 VALUES ( '$nombreReporte', '$asignado', '$fechaInicio', '$fechaFinal', '$estado', '$localizacion', '$descripcion', '$estadoEquipo', '$recomendacion', '$formaPago', '$profecional', '$cargo', '$nombreCliente', '$direccion', '$numero');";
-     //echo $query;
      $query3 ="INSERT INTO `hesk_reporte_de_servicio` ( `nombreReporte`, `asignado`, `fechaInicio`, `fechaFinal`, `estado`, `localizacion`, `clase_de_servicio`, `situacion_reportada`, `situacion_obserbada`, `descripcion`, `estadoEquipo`, `recomendacion`, `formaPago`,
       `profecional`, `cargo`, `nombreCliente`, `direccion`, `numero`) VALUES ( '$nombreReporte', '$asignado ', '$fechaInicio', '$fechaFinal', '$estado ', '$localizacion ', ' $clase_de_servicio', '$situacion_reportada', '$situacion_obserbada', '$descripcion',
        '$estadoEquipo', '$recomendacion', '$formaPago', '$profecional', '$cargo ', '$nombreCliente', '$direccion ', '$numero ')";
@@ -88,7 +80,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
      
      
-    
+    }
 
    
 
@@ -357,7 +349,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
 
 
-            <input id="Crear" name="Crear " type="submit" value="Crear Reporte" class="btn btn-full">
+            <input id="Crear" name="Crear" type="submit" value="Crear Reporte" class="btn btn-full">
         </form>
     </div>
 

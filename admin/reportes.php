@@ -173,15 +173,8 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
                 </label>
                 <select name="localizacion" id="localizacion" class="form-control">
-                    <?php 
-                        $sql = "SELECT id,nombre FROM hesk_zones";
-                        $res = hesk_dbQuery($sql);
-                        echo "<option disabled='true' value='0' selected></option>";
-                        echo "<option disabled='true' value='0' selected></option>";
-                        while ($reg = hesk_dbFetchAssoc($res)) {
-                            echo "<option value='$reg[id]'>$reg[nombre]</option>";
-                        }
-                    ?>
+                    
+                <option value="Bogota">Bogota</option>
                 </select>
             </div>
             <div class="form-group">

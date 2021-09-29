@@ -103,7 +103,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 <!-- Inicio de formularios -->
 <div style="margin-left: 10px;" class="main__content settings">
 
-    <h1 class="h1est">Agregar</h1>
+    <h1 class="h1est">Administrar Reportes </h1>
     <div class="table-wrap">
 
         <form action="reportes.php" method="post" class="form <?php echo isset($_SESSION['iserror']) && count($_SESSION['iserror']) ? 'invalid' : ''; ?>"
@@ -135,9 +135,10 @@ onsubmit='return validar()'>
                         <td><?php echo $rowiter['nombreReporte'] ?></td>
                         <td><?php echo $rowiter['nombre'] ?></td>
                         <td>
-                            
-                            <a href="reportes/reporteDeServicio.php?id=<?php echo $rowiter['id'] ?>">generar reporte</a>
-                    <td style='text-align: center;'><a style='color:blue;' href='edit_customer.php?cas0=$reg[ident]&cas=$reg[cliente]&cas2=$reg[zona]&cas3=$reg[idzona]' class=''><span data-tooltip='Editar'><i class='fas fa-edit'></i></span></a>\t<a style='color:red;' href='delete_customer.php?cas=$reg[ident]'><i class='fas fa-trash-alt'></i></a></td>
+                        <a href="reportes/reporteDeServicio.php?id=<?php echo $rowiter['id'] ?>">editar</a>
+                        <a href="reportes/reporteDeServicio.php?id=<?php echo $rowiter['id'] ?>">eliminar</a>
+                        <a href="reportes/reporteDeServicio.php?id=<?php echo $rowiter['id'] ?>">generar reporte</a>
+                    
                         </td>
                     </tr>
                     <?php

@@ -17,6 +17,35 @@ hesk_session_start();
 hesk_dbConnect();
 hesk_isLoggedIn();
 
+if (isset($_POST['Crear'])) {
+    $nombreReporte       = $_POST["nombreReporte"];
+    $asignado            = $_POST["asignado"];
+    $fechaInicio         = $_POST["fechaInicio"];
+    $fechaFinal          = $_POST["fechaFinal"];
+    $estado              = $_POST["estado"];
+    $localizacion        = $_POST["localizacion"];
+    $clase_de_servicio   = $_POST["clase_de_servicio"];
+    $situacion_reportada = $_POST["situacion_reportada"];
+    $situacion_obserbada = $_POST["situacion_obserbada"];
+    $descripcion         = $_POST["descripcion"];
+    $estadoEquipo        = $_POST["estadoEquipo"];
+    $recomendacion       =  $_POST["recomendacion"];
+    $formaPago           = $_POST["formaPago"];
+    $profecional         = $_POST["profecional"];
+    $cargo               = $_POST["cargo"];
+    $nombreCliente       = $_POST["nombreCliente"];
+    $direccion           = $_POST["direccion"];
+    $numero               = $_POST["numero"];
+
+    $query3 = "INSERT INTO `hesk_reporte_de_servicio` ( `nombreReporte`, `asignado`, `fechaInicio`, `fechaFinal`, `estado`, `localizacion`, `clase_de_servicio`, `situacion_reportada`, `situacion_obserbada`, `descripcion`, `estadoEquipo`, `recomendacion`, `formaPago`,
+      `profecional`, `cargo`, `nombreCliente`, `direccion`, `numero`) VALUES ( '$nombreReporte', '$asignado ', '$fechaInicio', '$fechaFinal', '$estado ', '$localizacion ', ' $clase_de_servicio', '$situacion_reportada', '$situacion_obserbada', '$descripcion',
+       '$estadoEquipo', '$recomendacion', '$formaPago', '$profecional', '$cargo ', '$nombreCliente', '$direccion ', '$numero ')";
+    hesk_dbQuery($query3);
+
+    header("location:verreport.php");
+
+}
+
 // Load custom fields
 require_once(HESK_PATH . 'inc/custom_fields.inc.php');
 
@@ -40,6 +69,14 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
 ?>
 <script type="text/javascript" src="../js/validation.js"></script>
+<?php
+
+
+
+    
+
+
+?>
 
 <head>
     <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
@@ -49,58 +86,14 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 </head>
 
 
-<?php
 
-
- if(isset($_POST['Crear'])){
-    $nombreReporte       = $_POST["nombreReporte"];
-    $asignado            = $_POST["asignado"];
-    $fechaInicio         = $_POST["fechaInicio"];
-    $fechaFinal          = $_POST["fechaFinal"];
-    $estado              = $_POST["estado"];
-    $localizacion        = $_POST["localizacion"];
-    $clase_de_servicio   = $_POST["clase_de_servicio"];
-    $situacion_reportada = $_POST["situacion_reportada"];
-    $situacion_obserbada = $_POST["situacion_obserbada"];
-    $descripcion         = $_POST["descripcion"];
-    $estadoEquipo        = $_POST["estadoEquipo"];
-    $recomendacion       =  $_POST["recomendacion"];
-    $formaPago           = $_POST["formaPago"];
-    $profecional         = $_POST["profecional"];
-    $cargo               = $_POST["cargo"];
-    $nombreCliente       = $_POST["nombreCliente"];
-    $direccion           = $_POST["direccion"];
-    $numero               = $_POST["numero"];
-
-     $query3 ="INSERT INTO `hesk_reporte_de_servicio` ( `nombreReporte`, `asignado`, `fechaInicio`, `fechaFinal`, `estado`, `localizacion`, `clase_de_servicio`, `situacion_reportada`, `situacion_obserbada`, `descripcion`, `estadoEquipo`, `recomendacion`, `formaPago`,
-      `profecional`, `cargo`, `nombreCliente`, `direccion`, `numero`) VALUES ( '$nombreReporte', '$asignado ', '$fechaInicio', '$fechaFinal', '$estado ', '$localizacion ', ' $clase_de_servicio', '$situacion_reportada', '$situacion_obserbada', '$descripcion',
-       '$estadoEquipo', '$recomendacion', '$formaPago', '$profecional', '$cargo ', '$nombreCliente', '$direccion ', '$numero ')";
-      hesk_dbQuery($query3);
-     
-       
-    
-     
-    }
-
-   
-    
-
-
-
-
-
-
-
-?>
 <!-- Inicio de formularios -->
 <div style="margin-left: 10px;" class="main__content settings">
 
     <h1 class="h1est">Agregar</h1>
     <div class="table-wrap">
 
-        <form action="reportes.php" method="post"
-            class="form <?php echo isset($_SESSION['iserror']) && count($_SESSION['iserror']) ? 'invalid' : ''; ?>"
-            onsubmit='return validar()'>
+        <form action="reportes.php" method="post" class="form <?php echo isset($_SESSION['iserror']) && count($_SESSION['iserror']) ? 'invalid' : ''; ?>" onsubmit='return validar()'>
 
             <div class="form-group">
                 <label>
@@ -123,13 +116,13 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                 <select name="asignado" id="asignado" class="form-control" style="border: 90%;">}
 
                     <?php
-                        $sql = "SELECT id,name FROM hesk_users  WHERE  rol = 1   " ;
-                        $res = hesk_dbQuery($sql);
-                        echo "<option disabled='true' value='0' selected></option>";
-                        echo "<option disabled='true' value='0' selected></option>";
-                        while ($reg = hesk_dbFetchAssoc($res)) {
-                            echo "<option value='$reg[id]'>$reg[name]</option>";
-                        }
+                    $sql = "SELECT id,name FROM hesk_users  WHERE  rol = 1   ";
+                    $res = hesk_dbQuery($sql);
+                    echo "<option disabled='true' value='0' selected></option>";
+                    echo "<option disabled='true' value='0' selected></option>";
+                    while ($reg = hesk_dbFetchAssoc($res)) {
+                        echo "<option value='$reg[id]'>$reg[name]</option>";
+                    }
                     ?>
                 </select>
                 </label>
@@ -173,8 +166,8 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
                 </label>
                 <select name="localizacion" id="localizacion" class="form-control">
-                    
-                <option value="Bogota">Bogota</option>
+
+                    <option value="Bogota">Bogota</option>
                 </select>
             </div>
             <div class="form-group">
@@ -199,8 +192,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
                 </label>
 
-                <textarea id="situacion_reportada" style="width: 100%;" type="textarea" class="form-control"
-                    name="situacion_reportada" maxlength="255" value=""></textarea>
+                <textarea id="situacion_reportada" style="width: 100%;" type="textarea" class="form-control" name="situacion_reportada" maxlength="255" value=""></textarea>
             </div>
 
             <div class="form-group">
@@ -209,8 +201,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
                 </label>
 
-                <textarea id="situacion_obserbada" style="width: 100%;" type="textarea" class="form-control"
-                    name="situacion_obserbada" maxlength="255" value=""></textarea>
+                <textarea id="situacion_obserbada" style="width: 100%;" type="textarea" class="form-control" name="situacion_obserbada" maxlength="255" value=""></textarea>
             </div>
 
             <div class="form-group">
@@ -219,8 +210,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
                 </label>
 
-                <textarea id="descripcion" style="width: 100%;" type="textarea" class="form-control" name="descripcion"
-                    maxlength="255" value=""></textarea>
+                <textarea id="descripcion" style="width: 100%;" type="textarea" class="form-control" name="descripcion" maxlength="255" value=""></textarea>
             </div>
 
 
@@ -229,8 +219,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                     <span>Estado de equipo</span>
 
                 </label>
-                <textarea style="width: 100%;" type="textarea" class="form-control" id="estadoEquipo"
-                    name="estadoEquipo" maxlength="255" value=""></textarea>
+                <textarea style="width: 100%;" type="textarea" class="form-control" id="estadoEquipo" name="estadoEquipo" maxlength="255" value=""></textarea>
             </div>
 
 
@@ -239,8 +228,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                     <span>Recomendacion</span>
 
                 </label>
-                <textarea style="width: 100%;" type="textarea" class="form-control" id="recomendacion"
-                    name="recomendacion" maxlength="255" value=""></textarea>
+                <textarea style="width: 100%;" type="textarea" class="form-control" id="recomendacion" name="recomendacion" maxlength="255" value=""></textarea>
             </div>
 
 
@@ -268,13 +256,13 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                 <select id="profecional" name="profecional" id="zona" class="form-control" style="border: 90%;">}
 
                     <?php
-                        $sql = "SELECT id,name FROM hesk_users  WHERE  rol = 1   " ;
-                        $res = hesk_dbQuery($sql);
-                        echo "<option disabled='true' value='0' selected></option>";
-                        echo "<option disabled='true' value='0' selected></option>";
-                        while ($reg = hesk_dbFetchAssoc($res)) {
-                            echo "<option value='$reg[id]'>$reg[name]</option>";
-                        }
+                    $sql = "SELECT id,name FROM hesk_users  WHERE  rol = 1   ";
+                    $res = hesk_dbQuery($sql);
+                    echo "<option disabled='true' value='0' selected></option>";
+                    echo "<option disabled='true' value='0' selected></option>";
+                    while ($reg = hesk_dbFetchAssoc($res)) {
+                        echo "<option value='$reg[id]'>$reg[name]</option>";
+                    }
                     ?>
                 </select>
             </div>
@@ -310,7 +298,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                     $res = hesk_dbQuery($sql);
                     while ($reg = hesk_dbFetchAssoc($res)) {
                     ?>
-                    <option value="<?php echo $reg['id'] ?>"><?php echo $reg['nombre'] ?></option>
+                        <option value="<?php echo $reg['id'] ?>"><?php echo $reg['nombre'] ?></option>
                     <?php
                     }
                     ?>
@@ -342,25 +330,25 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
 
 
-            <input id="Crear" name="Crear" type="submit" value="Crear Reporte" class="btn btn-full">
+            <input  id="Crear" name="Crear" type="submit" value="Crear Reporte" class="btn btn-full">
         </form>
     </div>
 
 
     <!-- Script para datatable -->
     <script>
-    $(document).ready(function() {
-        $('#tablazonas').DataTable({
-            "language": {
-                "lengthMenu": "Mostrar _MENU_ filas por pagina",
-                "zeroRecords": "No se encuentran resultados",
-                "info": "Mostrando _PAGE_ de _PAGES_",
-                "infoEmpty": "Sin filas disponibles",
-                "infoFiltered": "(filtered from _MAX_ total records)"
-            },
-            "pagingType": "full_numbers"
+        $(document).ready(function() {
+            $('#tablazonas').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ filas por pagina",
+                    "zeroRecords": "No se encuentran resultados",
+                    "info": "Mostrando _PAGE_ de _PAGES_",
+                    "infoEmpty": "Sin filas disponibles",
+                    "infoFiltered": "(filtered from _MAX_ total records)"
+                },
+                "pagingType": "full_numbers"
+            });
         });
-    });
     </script>
     <?php require_once(HESK_PATH . 'inc/footer.inc.php'); ?>
 

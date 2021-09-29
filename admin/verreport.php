@@ -135,9 +135,9 @@ onsubmit='return validar()'>
                         <td><?php echo $rowiter['nombreReporte'] ?></td>
                         <td><?php echo $rowiter['nombre'] ?></td>
                         <td>
-                            <a href="">editar</a>
-                            <a href="">eliminar</a>
-                            <a href="">generar reporte</a>
+                            
+                            <a href="reportes/reporteDeServicio.php?id=<?php echo $rowiter['id'] ?>">generar reporte</a>
+                    <td style='text-align: center;'><a style='color:blue;' href='edit_customer.php?cas0=$reg[ident]&cas=$reg[cliente]&cas2=$reg[zona]&cas3=$reg[idzona]' class=''><span data-tooltip='Editar'><i class='fas fa-edit'></i></span></a>\t<a style='color:red;' href='delete_customer.php?cas=$reg[ident]'><i class='fas fa-trash-alt'></i></a></td>
                         </td>
                     </tr>
                     <?php

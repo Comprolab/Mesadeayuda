@@ -1,4 +1,3 @@
-<script>alert("Estado cambiado con exito")</script>
 <?php
 
 define('IN_SCRIPT', 1);
@@ -18,10 +17,8 @@ hesk_load_database_functions();
 hesk_session_start();
 hesk_dbConnect();
 
-    $idconsu = $_POST['idC'];
+$idconsu = $_POST['idC'];
 
-    $consultaCons = "SELECT * FROM hesk_consumibles WHERE id=$idconsu";
-    $resCons = hesk_dbQuery($consultaCons);
-    $regCons = hesk_dbFetchAssoc($resCons);
-
-    hesk_dbQuery("UPDATE hesk_consumibles SET estado = !$regCons[estado] WHERE id = $regCons[id]");
+$sql = "DELETE FROM hesk_consumibles WHERE id=$idconsu";
+hesk_dbQuery($sql);
+?>

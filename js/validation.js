@@ -4,7 +4,7 @@ function validar() {
     // valores  conseguidos con getElementByid
 
 
-    nombre = document.getElementById("nombre").value;
+    nombre = document.getElementById("nombreReporte").value;
 
 
     // validacion de formulario  imput nombre de zona 

@@ -113,7 +113,7 @@ require_once(TEMPLATE_PATH . 'customer/util/rating.php');
                     </div>
                     <?php hesk3_show_messages($service_messages); ?>
                     <div class="nav">
-                        <a href="custo.php?a=add" class="navlink">
+                        <a href="custo.php?a=add" class="navlink" style="height: 85px;">
                             <div class="icon-in-circle">
                                 <svg class="icon icon-submit-ticket">
                                     <use xlink:href="<?php echo TEMPLATE_PATH; ?>customer/img/sprite.svg#icon-submit-ticket"></use>
@@ -124,7 +124,7 @@ require_once(TEMPLATE_PATH . 'customer/util/rating.php');
                                 <div class="navlink__descr"><?php echo $hesklang['open_ticket']; ?></div>
                             </div>
                         </a>
-                        <a href="ticket.php" class="navlink">
+                        <a href="ticket.php" class="navlink" style="height: 85px;">
                             <div class="icon-in-circle">
                                 <svg class="icon icon-document">
                                     <use xlink:href="<?php echo TEMPLATE_PATH; ?>customer/img/sprite.svg#icon-document"></use>

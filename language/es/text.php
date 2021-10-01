@@ -1621,7 +1621,7 @@ $hesklang['close_button_text']='Cerrar';
 $hesklang['create_new_ticket']='Crear Nuevo Ticket';
 $hesklang['delete_article']='Eliminar artículo';
 $hesklang['view_existing_tickets']='Ver tickets existentes';
-$hesklang['how_can_we_help']='Sistema de soporte y mantenimiento  Comprolab ,<br> como podemos ayudarte ?';
+$hesklang['how_can_we_help']='Sistema de soporte técnico  Comprolab ,<br> como podemos ayudarte ?';
 $hesklang['search_for_articles']='Buscar artículos';
 $hesklang['submit_a_support_request']='Enviar una Solicitud de Asistencia';
 $hesklang['maximum_x_attachments']='Máximo %s de adjuntos'; // %s = max number of attachments (specified in settings)

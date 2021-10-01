@@ -6,7 +6,7 @@
 // --> General settings
 $hesk_settings['site_title']='Website';
 $hesk_settings['site_url']='http://localhost';
-$hesk_settings['hesk_title']='Servicio Técnico comprolab';
+$hesk_settings['hesk_title']='Soporte Técnico Comprolab';
 $hesk_settings['hesk_url']='http://localhost/helpdesk/mesadeayuda';
 $hesk_settings['webmaster_mail']='comprolabcorreos@gmail.com';
 $hesk_settings['noreply_mail']='comprolabcorreos@gmail.com';

@@ -200,18 +200,7 @@ if (isset($_POST['Cargar'])) {
                                 <span class="tooltiptext">Eliminar registro</span>
                             </a>
                             <br>
-                            <a href="#" class="tooltip" onclick="
-                            document.getElementById('id01').style.display='block';
-                            $.ajax({
-                                type: 'POST',
-                                data: {
-                                    idC: <?php echo $reg['id'] ?>
-                                },
-                                success: function(data) {
-                                    alert(data);
-                                }
-                            });
-                            ">
+                            <a href="#" class="tooltip" onclick="editCons(<?php echo $reg['nombreCliente'] ?>)">
                                 <i class="far fa-edit" style="color: green;"></i>
                                 <span class="tooltiptext" id="tooltipleft">Editar registro</span>
                             </a>
@@ -252,17 +241,16 @@ if (isset($_POST['Cargar'])) {
                 <form class="w3-container" action="/action_page.php">
                     <div class="w3-section">
                         <label><b>Username</b></label>
-                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="usrname" required>
+                        <input id="idCEN" class="w3-input w3-border w3-margin-bottom" type="text" name="clienteE" disabled>
                         <label><b>Password</b></label>
                         <input class="w3-input w3-border" type="password" placeholder="Enter Password" name="psw" required>
                         <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Login</button>
-                        <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me
                     </div>
                 </form>
 
                 <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-                    <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
-                    <span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>
+                    <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancelar</button>
+                    
                 </div>
 
             </div>
@@ -312,6 +300,21 @@ if (isset($_POST['Cargar'])) {
                 event.preventDefault();
                 $(this).closest('tr').remove();
                 alert("Consumible eliminado");
+            }
+        });
+    }
+
+    function editCons(nomCli,consu,cant,fechaEnvio) {
+
+        $.ajax({
+            type: 'POST',
+            data: {
+                idCE: consu
+            },
+            success: function(data) {
+
+                document.getElementById('idCEN').value = consu;
+                document.getElementById('id01').style.display = 'block';
             }
         });
     }

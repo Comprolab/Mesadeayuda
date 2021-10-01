@@ -50,7 +50,7 @@ function Header()
    
     // Título
     
-    $this->Cell(100,10,'Reporte de servicio',1,0,'C');
+    $this->Cell(100,10,'Reporte de servicio ',1,0,'C');
     $this->Cell(40,10,'FO-ST-118 ' . 'Version1'  ,1,0,'C');
     // Salto de línea
     $this->Ln(20);
@@ -84,7 +84,7 @@ $pdf->SetX(20);
 $pdf->Cell(90 ,21,   " NIT. 860.350.711-1 Departamento de ingenieria   ", 1,0, 'C' );
 
 $pdf->SetX(110);
-$pdf->Cell(90 ,7,   'Reporte de servicio No.:  '. $row['id'], 1,1, 'C' );
+$pdf->Cell(90 ,7,   'Reporte de servicio No.:  ' .'RF ' . date("Y") .'- '. $row['id'], 1,1, 'C' );
 $pdf->SetX(110);
 $pdf->Cell(90 ,7,   'Sello de seguridad No.: ', 1,1, 'C' );
 $pdf->SetX(110);

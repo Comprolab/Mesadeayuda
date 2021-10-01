@@ -124,7 +124,7 @@ onsubmit='return validar()'>
             <tbody>
                 <?php
                
-               $query = "SELECT hesk_reporte_de_servicio.*,`hesk_customers`.`nombre` FROM `hesk_reporte_de_servicio` INNER JOIN `hesk_customers` ON `hesk_reporte_de_servicio`.`nombreCliente` = `hesk_customers`.`id` order by `hesk_customers`.`id` desc;";
+               $query = "SELECT hesk_reporte_de_servicio.*,`hesk_customers`.`nombre` FROM `hesk_reporte_de_servicio` INNER JOIN `hesk_customers` ON `hesk_reporte_de_servicio`.`nombreCliente` = `hesk_customers`.`id` order by `hesk_customers`.`id`  desc;";
           
                $row = hesk_dbQuery( $query );
 
@@ -135,8 +135,8 @@ onsubmit='return validar()'>
                         <td><?php echo $rowiter['nombreReporte'] ?></td>
                         <td><?php echo $rowiter['nombre'] ?></td>
                         <td>
-                        <a href="reportes/reporteDeServicio.php?id=<?php echo $rowiter['id'] ?>">editar</a>
-                        <a href="reportes/reporteDeServicio.php?id=<?php echo $rowiter['id'] ?>">eliminar</a>
+                       <!-- <a href="reportes/reporteDeServicio.php?id=<?php echo $rowiter['id'] ?>">editar</a>
+                        <a href="reportes/reporteDeServicio.php?id=<?php echo $rowiter['id'] ?>">eliminar</a>  --->
                         <a href="reportes/reporteDeServicio.php?id=<?php echo $rowiter['id'] ?>">generar reporte</a>
                     
                         </td>

@@ -82,6 +82,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
     <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
     <script src="../js/jquery-3.5.1.js"></script>
     <script src="../js/jquery.dataTables.min.js"></script>
+    <script  src="validaciones.js"> </script>
 
 </head>
 
@@ -90,10 +91,10 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 <!-- Inicio de formularios -->
 <div style="margin-left: 10px;" class="main__content settings">
 
-    <h1 class="h1est">Agregar</h1>
+    <h1 class="h1est">Crear Reporte </h1>
     <div class="table-wrap">
 
-        <form action="reportes.php" method="post" class="form <?php echo isset($_SESSION['iserror']) && count($_SESSION['iserror']) ? 'invalid' : ''; ?>" onsubmit='return validar()'>
+        <form action="reportes.php" method="post" class="form <?php echo isset($_SESSION['iserror']) && count($_SESSION['iserror']) ? 'invalid' : ''; ?>" onsubmit='return validarreporte()'>
 
             <div class="form-group">
                 <label>
@@ -101,6 +102,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
                     <div class="form-group">
                         <select name="nombreReporte" id="nombreReporte" class="form-control" style="border: 90%;">}
+                            <option value=""></option>
                             <option value="Reporte de servicio">Reporte de servicio</option>
 
                         </select>
@@ -114,7 +116,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
                 </label>
                 <select name="asignado" id="asignado" class="form-control" style="border: 90%;">}
-
+                <option value="">selecione</option>
                     <?php
                     $sql = "SELECT id,name FROM hesk_users  WHERE  rol = 1   ";
                     $res = hesk_dbQuery($sql);
@@ -197,7 +199,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
             <div class="form-group">
                 <label>
-                    <span>situacion obserbada</span>
+                    <span>Situacion obserbada</span>
 
                 </label>
 
@@ -353,4 +355,5 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
     <?php require_once(HESK_PATH . 'inc/footer.inc.php'); ?>
 
     <script type="text/javascript" src="../js/no-resend.js"> </script>
-    <script type="text/javascript" src="../js/validation.js"> </script>
+
+ 

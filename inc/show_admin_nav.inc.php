@@ -304,6 +304,11 @@ $calling_script = basename($_SERVER['PHP_SELF'], '.php');
                                                 <?php echo "Reporte de servicio" ?>
                                             </a>
                                         </li>
+                                        <li class="submenu__listitem <?php if ($calling_script === 'module_escalate') { ?>current<?php } ?>">
+                                            <a href="verreport.php">
+                                                <?php echo " Administracion reporte " ?>
+                                            </a>
+                                        </li>
                                     <?php
                                     }
                                 ?>

@@ -170,6 +170,22 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                 <select name="localizacion" id="localizacion" class="form-control">
 
                     <option value="Bogota">Bogota</option>
+                    <option value="Medellin">Medellin</option>
+                    <option value="Cali">Cali</option>
+                    <option value="Cartagena de Indias">Cartagena de Indias</option>
+                    <option value="Soacha">Soacha</option>
+                    <option value="Cúcuta">Cúcuta</option>
+                    <option value="Soledad">Soledad</option> 
+                    <option value="Bello">Bello</option>
+                    <option value="Villavicencio">Villavicencio</option>
+                    <option value="Ibagué">Ibagué</option>
+                    <option value="Valledupar">Valledupar</option>
+                    <option value="Manizales">Manizales</option>
+                    <option value="Pereira">Pereira</option>
+                    <option value="Montería">Montería</option>
+                    <option value="Neiva">Neiva</option>
+                    <option value="Pasto">Pasto</option>
+                    <option value="Armenia">Armenia</option>
                 </select>
             </div>
             <div class="form-group">

@@ -83,7 +83,7 @@ require_once(TEMPLATE_PATH . 'customer/util/alerts.php');
                     <svg class="icon icon-chevron-right">
                         <use xlink:href="<?php echo TEMPLATE_PATH; ?>customer/img/sprite.svg#icon-chevron-right"></use>
                     </svg>
-                    <a href="<?php echo $hesk_settings['hesk_url']; ?>">
+                    <a href="custo.php">
                         <span><?php echo $hesk_settings['hesk_title']; ?></span>
                     </a>
                     <svg class="icon icon-chevron-right">
@@ -155,7 +155,7 @@ require_once(TEMPLATE_PATH . 'customer/util/alerts.php');
                             ?>
                             <b><?php echo $hesklang['forgot_tid']; ?></b><br><br>
                             <?php echo $hesklang['tid_mail']; ?>
-                            <form action="index.php" method="post" name="form1" class="form">
+                            <form action="custo.php" method="post" name="form1" class="form">
                                 <div class="form-group">
                                     <label class="label" style="display: none"><?php echo $hesklang['email']; ?></label>
                                     <input id="forgot-email" type="email" class="form-control" name="email" value="<?php echo $email; ?>">

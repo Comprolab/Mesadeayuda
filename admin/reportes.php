@@ -164,7 +164,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
             <div class="form-group">
                 <label>
-                    <span>Localizacion</span>
+                    <span>Localización</span>
 
                 </label>
                 <select name="localizacion" id="localizacion" class="form-control">
@@ -199,7 +199,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
             <div class="form-group">
                 <label>
-                    <span>Situacion obserbada</span>
+                    <span>Situacion observada</span>
 
                 </label>
 
@@ -227,7 +227,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
             <div class="form-group">
                 <label>
-                    <span>Recomendacion</span>
+                    <span>Recomendación</span>
 
                 </label>
                 <textarea style="width: 100%;" type="textarea" class="form-control" id="recomendacion" name="recomendacion" maxlength="255" value=""></textarea>
@@ -252,7 +252,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
             <div class="form-group">
                 <label>
-                    <span>Profecional</span>
+                    <span>Profesional</span>
 
                 </label>
                 <select id="profecional" name="profecional" id="zona" class="form-control" style="border: 90%;">}
@@ -311,7 +311,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
             <div class="form-group">
                 <label>
-                    <span>Direccion</span>
+                    <span>Dirección</span>
 
                 </label>
                 <input type="text" class="form-control" id="direccion" name="direccion" maxlength="255" value="">
@@ -320,7 +320,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
             <div class="form-group">
                 <label>
-                    <span>Numero de telefono del cliente </span>
+                    <span>Número de telefono del cliente </span>
 
                 </label>
                 <input type="text" class="form-control" id="numero" name="numero" maxlength="255" value="">

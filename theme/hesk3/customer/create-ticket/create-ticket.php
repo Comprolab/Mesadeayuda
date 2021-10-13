@@ -95,7 +95,7 @@ hesk_isLoggedIn();
                         <svg class="icon icon-chevron-right">
                             <use xlink:href="<?php echo TEMPLATE_PATH; ?>customer/img/sprite.svg#icon-chevron-right"></use>
                         </svg>
-                        <a href="index.php">
+                        <a href="custo.php">
                             <span><?php echo $hesk_settings['hesk_title']; ?></span>
                         </a>
                         <svg class="icon icon-chevron-right">

@@ -38,7 +38,7 @@ if (!defined('IN_SCRIPT')) {
         <header class="header">
             <div class="contr">
                 <div class="header__inner">
-                    <a href="<?php echo $hesk_settings['hesk_url']; ?>" class="header__logo">
+                    <a href="#" class="header__logo">
                         <?php echo $hesk_settings['hesk_title']; ?>
                     </a>
                 </div>

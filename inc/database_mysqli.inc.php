@@ -169,6 +169,7 @@ function hesk_dbQuery($query)
     global $hesk_db_link;
     global $hesklang, $hesk_settings;
 
+
     if ( ! $hesk_db_link && ! hesk_dbConnect())
     {
         return false;
@@ -176,19 +177,20 @@ function hesk_dbQuery($query)
 
     $hesk_last_query = $query;
 
-    # echo "<p>EXPLAIN $query</p>\n";
+    #echo "<p>EXPLAIN $query</p>\n";
 
     if ($res = @mysqli_query($hesk_db_link, $query))
     {
+        
     	return $res;
     }
     elseif ($hesk_settings['debug_mode'])
     {
-	    hesk_error("$hesklang[cant_sql]: $query</p><p>$hesklang[mysql_said]:<br />".mysqli_error($hesk_db_link)."</p>");
+        hesk_error("$hesklang[cant_sql]: $query asdasdasd</p><p>$hesklang[mysql_said]:<br />".mysqli_error($hesk_db_link)."</p>");
     }
     else
     {
-	    hesk_error("$hesklang[cant_sql]</p><p>$hesklang[contact_webmsater] <a href=\"mailto:$hesk_settings[webmaster_mail]\">$hesk_settings[webmaster_mail]</a></p>");
+        hesk_error("$hesklang[cant_sql]</p><p>$hesklang[contact_webmsater] <a href=\"mailto:$hesk_settings[webmaster_mail]\">$hesk_settings[webmaster_mail]</a></p>");
     }
 
 } // END hesk_dbQuery()

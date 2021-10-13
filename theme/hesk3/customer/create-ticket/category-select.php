@@ -102,7 +102,7 @@ require(HESK_PATH . 'inc/admin_functions.inc.php');
                     ?>
                 </div>
                 <div class="centrado">
-                    <a href="index.php" class="navbar__logo">
+                    <a href="custo.php" class="navbar__logo">
                         <?php  echo $hesklang['help_desk'] ?>
                     </a>
                 </div>

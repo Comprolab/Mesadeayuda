@@ -108,7 +108,7 @@ require(HESK_PATH . 'inc/admin_functions.inc.php');
                                 echo $hesklang['spam_inbox'];
                             }
                             ?><br><br>
-                            <a class="btn btn-full" ripple="ripple" href="<?php echo $hesk_settings['hesk_url']; ?>/ticket.php?track=<?php echo $trackingId ?>">
+                            <a class="btn btn-full" ripple="ripple" href="ticket.php?track=<?php echo $trackingId ?>">
                                 <?php echo $hesklang['view_your_ticket']; ?>
                             </a>
                         </p>

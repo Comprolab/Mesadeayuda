@@ -59,7 +59,7 @@ require_once(TEMPLATE_PATH . 'customer/util/rating.php');
         <header class="header">
             <div class="contr">
                 <div class="header__inner">
-                    <a href="<?php echo $hesk_settings['hesk_url']; ?>" class="header__logo">
+                    <a href="#" class="header__logo">
                         <?php echo $hesk_settings['hesk_title']; ?>
                     </a>
                     <?php if ($hesk_settings['can_sel_lang']): ?>
@@ -104,7 +104,7 @@ require_once(TEMPLATE_PATH . 'customer/util/rating.php');
                 <div class="contr">
                     <div class="help-search">
                     <div class="centrado">
-                        <a href="index.php" class="navbar__logo">
+                        <a href="custo.php" class="navbar__logo">
                             <?php  echo $hesklang['help_desk'] ?>
                         </a>
                     </div>

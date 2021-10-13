@@ -18,13 +18,13 @@ hesk_load_database_functions();
 
 hesk_dbConnect();
 
-$res = hesk_dbQuery("SELECT * FROM hesk_registros_diarios WHERE fecha BETWEEN '$_POST[fechaReporte]' AND '$_POST[fechaReporte2]'");
+$res = hesk_dbQuery("SELECT * FROM hesk_tareas_planificadas WHERE fecha BETWEEN '$_POST[fechaReporte]' AND '$_POST[fechaReporte2]' ORDER BY fecha,nombreTecnico");
 
 if (hesk_dbNumRows($res) == 0) {
 
 ?>
     <h1>
-        <center>Este día no se realizaron actividades</center>
+        <center>Este día no se Planificaron actividades</center>
     </h1>
     <h1>
         <center>FECHA: <?php echo $_POST['fechaReporte'] . " HASTA " . $_POST['fechaReporte2'] ?></center>
@@ -49,6 +49,7 @@ if (hesk_dbNumRows($res) == 0) {
         <style>
             table {
                 border: 1px solid;
+                width: 100%;
             }
 
             td,
@@ -83,7 +84,7 @@ if (hesk_dbNumRows($res) == 0) {
 
     <body>
         <center>
-            <h1>REPORTE TAREAS DIARIAS TECNICO DE SISTEMAS</h1>
+            <h1>TAREAS PLANIFICADAS TECNICO DE SISTEMAS</h1>
             <h3>Fecha: <?php echo $_POST['fechaReporte'] . " HASTA " . $_POST['fechaReporte2'] ?></h3>
 
             <table id="example" class="table table-striped">
@@ -103,10 +104,10 @@ if (hesk_dbNumRows($res) == 0) {
                         <tr>
                             <td style="width: 75px;"><?php echo $reg['fecha'] ?></td>
                             <td style="width: 90px;"><?php echo $reg['nombreTecnico'] ?></td>
-                            <td style="min-width: 150px; max-width: 200px; word-break: break-word;">
+                            <td style="width: 200px; word-break: break-word;">
                                 <?php echo $reg['tareaRealizada'] ?>
                             </td>
-                            <td style="min-width: 250px;word-break: break-word;"><?php echo $reg['observaciones'] ?></td>
+                            <td style="width: 200px;word-break: break-word;"><?php echo $reg['observaciones'] ?></td>
                         </tr>
                     <?php
                     }

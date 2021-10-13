@@ -314,11 +314,6 @@ if (false /*$_SESSION['rol'] == 2 */) {
                                             <?php echo " Administracion reporte " ?>
                                         </a>
                                     </li>
-                                    <li class="submenu__listitem" >
-                                        <a href="admin_daily_activity.php">
-                                            Actividad diaria
-                                        </a>
-                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -612,6 +607,18 @@ if (false /*$_SESSION['rol'] == 2 */) {
                         <div class="listitem__menu">
                             <a href="profile.php" class="listitem__caption">
                                 <?php echo $hesklang['profile']; ?>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="listitem <?php if ($calling_script === 'export') { ?>current<?php } ?>">
+                        <div class="listitem__icon">
+                            <a style="font-size: 25px;" href="admin_daily_activity.php">
+                                <i  class="fas fa-book"></i>
+                            </a>
+                        </div>
+                        <div class="listitem__menu">
+                            <a href="admin_daily_activity.php" class="listitem__caption">
+                                Acividad diaria
                             </a>
                         </div>
                     </li>

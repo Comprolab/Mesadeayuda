@@ -45,9 +45,8 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 </head>
 
 <div style="margin-left: 10px; padding-right: 10px;" class="main__content settings">
-    <a href="admin_planify_activity.php" class="btnb btnb-primary">Planificar</a>
     <div class="table-wrap">
-        <h1 class="h1est">Tareas Diarias</h1>
+        <h1 class="h1est">Tareas Planificadas</h1>
         <form action="" id="formDailyActivity" method="post" class="form">
 
             <div class="form-group">
@@ -61,7 +60,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
             </div>
 
             <div class="form-group">
-                <label for="tareaRealizada">Tarea realizada</label>
+                <label for="tareaRealizada">Tarea a realizar</label>
                 <textarea id="tareaRealizada" name="tareaRealizada" type="text" class="form-control" style="width: 100%;"></textarea>
             </div>
 
@@ -77,7 +76,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
     </div>
 
     <?php
-    $queryRegDiario = "SELECT * FROM hesk_registros_diarios";
+    $queryRegDiario = "SELECT * FROM hesk_tareas_planificadas";
     $resDiario = hesk_dbQuery($queryRegDiario);
     ?>
 
@@ -124,7 +123,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
         </table>
         <hr>
         <h1 class="h1est">Exportar por fecha</h1>
-        <form action="reportesDiarios/pdf_report_daily.php" method="POST">
+        <form action="actividadesPlanificadas/pdf_actividades_planificadas.php" method="POST">
             <div class="form-group">
                 <input class="form-control" type="date" value="<?php echo date("Y-m-d") ?>" name="fechaReporte" id="fechaReporte">
             </div>
@@ -141,17 +140,16 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
 <script>
-
-    function eliminarActividad(ids){
+    function eliminarActividad(ids) {
         $.ajax({
             type: 'POST',
-            url: 'eliminarActividad.php',
+            url: 'eliminarPlan.php',
             data: {
                 del_id: ids
             },
-            success: function(data){
+            success: function(data) {
                 alert("Se eliminó el registro !!");
-                $("#row"+ids).css("display","none");
+                $("#row" + ids).css("display", "none");
             }
         });
     }
@@ -160,11 +158,11 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
         if (validar()) {
             $.ajax({
                 type: 'POST',
-                url: 'insertRegistroDiario.php',
+                url: 'actividadesPlanificadas/insertPlanificacionTarea.php',
                 data: $('#formDailyActivity').serialize(),
                 success: function(data) {
                     alert("Insersión exitosa!");
-                    location.reload();
+                    document.getElementById("formDailyActivity").reset();
                 }
             });
         }

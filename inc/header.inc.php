@@ -32,6 +32,10 @@ include HESK_PATH.'fpdf/fpdf.php';
     <link rel="manifest" href="<?php echo HESK_PATH; ?>img/favicon/site.webmanifest">
     <link rel="mask-icon" href="<?php echo HESK_PATH; ?>img/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <link rel="shortcut icon" href="<?php echo HESK_PATH; ?>img/favicon/favicon.ico">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css">
+
     <meta name="msapplication-TileColor" content="#2d89ef">
     <meta name="msapplication-config" content="<?php echo HESK_PATH; ?>img/favicon/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">

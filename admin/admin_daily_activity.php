@@ -40,9 +40,13 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
 ?>
 
-<div style="margin-left: 10px;" class="main__content settings">
+<head>
+
+</head>
+
+<div style="margin-left: 10px; padding-right: 10px;" class="main__content settings">
     <div class="table-wrap">
-        <h1 class="h1est">Actividad diaria</h1>
+        <h1 class="h1est">Tareas Diarias</h1>
         <form action="" id="formDailyActivity" method="post" class="form">
 
             <div class="form-group">
@@ -71,7 +75,64 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
         <p id="mssg"></p>
     </div>
 
+    <?php
+    $queryRegDiario = "SELECT * FROM hesk_registros_diarios";
+    $resDiario = hesk_dbQuery($queryRegDiario);
+    ?>
+
+    <div class="table-wrap" style="width: 100%;">
+        <table id="example" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Nombre Técnico</th>
+                    <th>Tarea Realizada</th>
+                    <th>Observaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                while ($reg = hesk_dbFetchAssoc($resDiario)) {
+                ?>
+                    <tr>
+                        <td><?php echo $reg['fecha'] ?></td>
+                        <td><?php echo $reg['nombreTecnico'] ?></td>
+                        <td style="min-width: 250px; word-break: break-word;">
+                            <?php echo $reg['tareaRealizada'] ?>
+                        </td>
+                        <td style="min-width: 250px;word-break: break-all;"><?php echo $reg['observaciones'] ?></td>
+                    </tr>
+                <?php
+                }
+                ?>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Nombre Técnico</th>
+                    <th>Tarea Realizada</th>
+                    <th>Observaciones</th>
+                </tr>
+            </tfoot>
+
+        </table>
+        <hr>
+        <h1 class = "h1est">Exportar por fecha</h1>
+        <form action="reportesDiarios/pdf_report_daily.php" method="POST">
+            <div class="form-group">
+                <input class="form-control" type="date" value="<?php echo date("Y-m-d") ?>" name="fechaReporte" id="fechaReporte">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="date" value="<?php echo date("Y-m-d") ?>" name="fechaReporte2" id="fechaReporte">
+            </div>
+            <input type="submit" value="exportar" class="btnb btnb-info" id="fechaR">
+        </form>
+    </div>
+
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
 <script>
     function registarDiario() {
@@ -91,11 +152,20 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
     }
 
     function validar() {
-        
+
         if ($("#tareaRealizada").val() == "") {
             alert("Debe digitar sus tareas realizadas");
             return false;
         }
         return true;
     }
+
+    $(document).ready(function() {
+        $('#example').DataTable({
+            "language": {
+                "url": "../language/es/datatable.json"
+            }
+        });
+    });
 </script>
+<?php require_once(HESK_PATH . 'inc/footer.inc.php'); ?>

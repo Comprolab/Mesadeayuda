@@ -1,13 +1,10 @@
 <?php
 
 
-
-require("../../dompdf/autoload.inc.php");
-
 ob_start();
 
-?>
-<?php
+
+
 define('IN_SCRIPT', 1);
 define('HESK_PATH', '../../');
 
@@ -17,9 +14,11 @@ require(HESK_PATH . 'inc/common.inc.php');
 hesk_load_database_functions();
 
 hesk_dbConnect();
-
 $res = hesk_dbQuery("SELECT * FROM hesk_registros_diarios WHERE fecha BETWEEN '$_POST[fechaReporte]' AND '$_POST[fechaReporte2]'");
 
+
+
+//echo "SELECT * FROM hesk_registros_diarios WHERE fecha BETWEEN '$_POST[fechaReporte]' AND '$_POST[fechaReporte2]'";
 if (hesk_dbNumRows($res) == 0) {
 
 ?>
@@ -103,10 +102,10 @@ if (hesk_dbNumRows($res) == 0) {
                         <tr>
                             <td style="width: 75px;"><?php echo $reg['fecha'] ?></td>
                             <td style="width: 90px;"><?php echo $reg['nombreTecnico'] ?></td>
-                            <td style="min-width: 150px; max-width: 200px; word-break: break-word;">
+                            <td style="width: 200px; word-break: break-word;">
                                 <?php echo $reg['tareaRealizada'] ?>
                             </td>
-                            <td style="min-width: 250px;word-break: break-word;"><?php echo $reg['observaciones'] ?></td>
+                            <td style="width: 200px;word-break: break-word;"><?php echo $reg['observaciones'] ?></td>
                         </tr>
                     <?php
                     }
@@ -127,14 +126,16 @@ if (hesk_dbNumRows($res) == 0) {
     </html>
 <?php
 }
-$dompdf = new Dompdf\Dompdf();
+
+
+require("../../dompdf/autoload.inc.php");
+use Dompdf\Dompdf;
+
+$dompdf = new Dompdf();
 
 $dompdf->loadHtml(ob_get_clean());
 $dompdf->setPaper("letter", "landscape");
 
 $dompdf->render();
 $dompdf->stream("Actividades diarias $_POST[fechaReporte] a $_POST[fechaReporte2].pdf");
-
-
-
 ?>

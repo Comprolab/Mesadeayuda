@@ -124,7 +124,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
         </table>
         <hr>
         <h1 class="h1est">Exportar por fecha</h1>
-        <form action="reportesDiarios/pdf_report_daily.php" method="POST">
+        <form action="reportesDiarios/pdf_report_daily2.php" method="POST">
             <div class="form-group">
                 <input class="form-control" type="date" value="<?php echo date("Y-m-d") ?>" name="fechaReporte" id="fechaReporte">
             </div>

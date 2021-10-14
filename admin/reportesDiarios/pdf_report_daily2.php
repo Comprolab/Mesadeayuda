@@ -38,7 +38,7 @@ require(HESK_PATH . 'inc/common.inc.php');
 hesk_load_database_functions();
 
 hesk_dbConnect();
-$res = hesk_dbQuery("SELECT * FROM hesk_tareas_planificadas WHERE fecha BETWEEN '$_POST[fechaReporte]' AND '$_POST[fechaReporte2]'");
+$res = hesk_dbQuery("SELECT * FROM hesk_registros_diarios WHERE fecha BETWEEN '$_POST[fechaReporte]' AND '$_POST[fechaReporte2]'");
 
 class MYPDF extends TCPDF {
 
@@ -50,7 +50,7 @@ class MYPDF extends TCPDF {
         // Set font
         $this->SetFont('helvetica', 'B', 20);
         // Title
-        $this->writeHTMLCell(150,'',40,8,"<h4>TAREAS PLANIFICADAS TECNICOS DE SISTEMAS</h4>",0,0,false,true,'C',true);
+        $this->writeHTMLCell(150,'',40,8,"<h4>REPORTE TAREAS DIARIAS TÉCNICOS DE SISTEMAS</h4>",0,0,false,true,'C',true);
     }
 
     // Page footer

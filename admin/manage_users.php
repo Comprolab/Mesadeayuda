@@ -257,7 +257,7 @@ if ($action = hesk_REQUEST('a')) {
                             /* Is user rating enabled? */
                             if ($hesk_settings['rating']) {
                             ?>
-                                <th><?php echo $hesklang['rating']; ?></th>
+                                <!-- <th><?php echo $hesklang['rating']; ?></th> -->
                             <?php
                             }
 
@@ -407,12 +407,12 @@ EOC;
                             }
 
 
-                            if ($hesk_settings['rating']) {
-                                $alt = $myuser['rating'] ? sprintf($hesklang['rated'], sprintf("%01.1f", $myuser['rating']), ($myuser['ratingneg'] + $myuser['ratingpos'])) : $hesklang['not_rated'];
-                                echo '<td style="text-align:center; white-space:nowrap;">
-                            ' . hesk3_get_rating($myuser['rating']) . '
-                        </td>';
-                            }
+                        //     if ($hesk_settings['rating']) {
+                        //         $alt = $myuser['rating'] ? sprintf($hesklang['rated'], sprintf("%01.1f", $myuser['rating']), ($myuser['ratingneg'] + $myuser['ratingpos'])) : $hesklang['not_rated'];
+                        //         echo '<td style="text-align:center; white-space:nowrap;">
+                        //     ' . hesk3_get_rating($myuser['rating']) . '
+                        // </td>';
+                        //     }
 
                             if ($hesk_settings['autoassign']) {
                                 echo '<td>' . $autoassign_code . '</td>';

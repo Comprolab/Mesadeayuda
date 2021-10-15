@@ -86,7 +86,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                 <tr>
                     <th>Fecha</th>
                     <th>Nombre Técnico</th>
-                    <th>Tarea Realizada</th>
+                    <th>Tarea a Realizar</th>
                     <th>Observaciones</th>
                     <th>Acciones</th>
                 </tr>
@@ -114,7 +114,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                 <tr>
                     <th>Fecha</th>
                     <th>Nombre Técnico</th>
-                    <th>Tarea Realizada</th>
+                    <th>Tarea a Realizar</th>
                     <th>Observaciones</th>
                     <th>Acciones</th>
                 </tr>
@@ -123,7 +123,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
         </table>
         <hr>
         <h1 class="h1est">Exportar por fecha</h1>
-        <form action="actividadesPlanificadas/pdf_actividades_planificadas.php" method="POST">
+        <form action="actividadesPlanificadas/pdf_actividades_planificadas.php" target="_blank" method="POST">
             <div class="form-group">
                 <input class="form-control" type="date" value="<?php echo date("Y-m-d") ?>" name="fechaReporte" id="fechaReporte">
             </div>

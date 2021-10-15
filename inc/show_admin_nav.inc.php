@@ -622,6 +622,18 @@ if (false /*$_SESSION['rol'] == 2 */) {
                             </a>
                         </div>
                     </li>
+                    <li class="listitem <?php if ($calling_script === 'export') { ?>current<?php } ?>">
+                        <div class="listitem__icon">
+                            <a style="font-size: 25px;" href="admin_planify_activity.php">
+                                <i  class="far fa-calendar-plus"></i>
+                            </a>
+                        </div>
+                        <div class="listitem__menu">
+                            <a href="admin_planify_activity.php" class="listitem__caption">
+                                Planificar actividades
+                            </a>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </nav>

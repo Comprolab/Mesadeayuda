@@ -2137,7 +2137,7 @@ function hesk_printReplyForm() {
                     <input type="text" class="form-control short" name="time_worked" id="time_worked" size="10" value="<?php echo ( isset($_SESSION['time_worked']) ? hesk_getTime($_SESSION['time_worked']) : '00:00:00'); ?>" />
                 </div>
 
-                <a href="javascript:" class="tooltip" id="pause_btn" title="<?php echo $hesklang['start']; ?>">
+                <!-- <a href="javascript:" class="tooltip" id="pause_btn" title="<?php echo $hesklang['start']; ?>">
                     <svg class="icon icon-pause">
                         <use xlink:href="<?php echo HESK_PATH; ?>img/sprite.svg#icon-pause"></use>
                     </svg>
@@ -2146,7 +2146,7 @@ function hesk_printReplyForm() {
                     <svg class="icon icon-refresh">
                         <use xlink:href="<?php echo HESK_PATH; ?>img/sprite.svg#icon-refresh"></use>
                     </svg>
-                </a>
+                </a> -->
                 <script>
                     $('#pause_btn').click(function() {
                         ss();

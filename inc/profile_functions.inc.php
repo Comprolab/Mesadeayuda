@@ -91,11 +91,14 @@ function hesk_profile_tab($session_array = 'new', $is_profile_page = true)
                     });
                 </script>
 
-                <label for="rolU"><?php echo $hesklang['user_rolU']; ?></label>
-                <select class="form-control" style="height: 40px; border-radius: 50px; border-color: black;" name="rolU" id="rolU">
-                    <option value="1">Personal tecnico</option>
-                    <option value="2">Cliente</option>
-                </select>
+                <?php if ($_SESSION['isadmin']) { ?>
+                    <label for="rolU"><?php echo $hesklang['user_rolU']; ?></label>
+                    <select class="form-control" style="height: 40px; border-radius: 50px; border-color: black;" name="rolU" id="rolU">
+                        <option value="1">Personal tecnico</option>
+                        <option value="2">Cliente</option>
+                    </select>
+                <?php } ?>
+
                 <label for="zoneC" id="lblZoneC" style="display: none;">Zona Cliente</label>
                 <select class="form-control" style="height: 40px; border-radius: 50px; border-color: black;" name="zoneC" id="zoneC" hidden>
                     <?php
@@ -113,12 +116,15 @@ function hesk_profile_tab($session_array = 'new', $is_profile_page = true)
             </div>
             <section class="item--section">
                 <h4>
-                    <?php echo $hesklang['pass']; ?>
+
                     <?php if ($is_profile_page) : ?>
+                        Actualizar Contraseña
                         <span>
                             <?php echo $hesklang['optional']; ?>
                         </span>
-                    <?php endif; ?>
+                    <?php else :
+                        echo $hesklang['pass'];
+                    endif; ?>
                 </h4>
                 <div class="form-group">
                     <label for="prof_newpass"><?php echo $is_profile_page ? $hesklang['new_pass'] : $hesklang['pass']; ?></label>

@@ -46,11 +46,11 @@ class MYPDF extends TCPDF {
     public function Header() {
         // Logo
         $image_file = K_PATH_IMAGES.'logo_comprolab.png';
-        $this->Image($image_file, 10, 0, 30, 0, 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+        //$this->Image($image_file, 10, 0, 30, 0, 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         // Set font
         $this->SetFont('helvetica', 'B', 20);
         // Title
-        $this->writeHTMLCell(150,'',40,8,"<h4>TAREAS PLANIFICADAS TECNICOS DE SISTEMAS</h4>",0,0,false,true,'C',true);
+        $this->writeHTMLCell(150,'',31,8,"<h4>TAREAS PLANIFICADAS TECNICOS DE SISTEMAS</h4>",0,0,false,true,'C',true);
     }
 
     // Page footer
@@ -200,7 +200,7 @@ $pdf->writeHTML(ob_get_clean(), true, false, false, false, '');
 // -----------------------------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output('example_048.pdf', 'I');
+$pdf->Output("Actividades planificadas $_POST[fechaReporte] hasta $_POST[fechaReporte2].pdf", 'I');
 
 //============================================================+
 // END OF FILE

@@ -49,9 +49,14 @@ class MYPDF extends TCPDF {
         // $this->Image($image_file, 10, 0, 30, 0, 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         // $this->writeHTMLCell(50,'',5,8,"<img src = $image_file>",0,0,false,true,'L',true);
         // Set font
-        $this->SetFont('helvetica', 'B', 20);
+        $this->SetFont('helvetica', 'B', 15);
         // Title
-        $this->writeHTMLCell(150,'',31,8,"<h4 style = 'text-align: center;'>REPORTE TAREAS DIARIAS TÉCNICOS DE SISTEMAS</h4>",0,0,false,true,'C',true);
+        $this->writeHTMLCell(150,1,31,8,"<h4 style = 'text-align: center;'>REPORTE TAREAS DIARIAS TÉCNICOS DE SISTEMAS</h4>",0,0,false,true,'C',true);
+        
+        $this->SetFont('helvetica', 'B', 10);
+        
+        $this->writeHTMLCell(150,1,31,20,"<p style = 'text-align: center;'>Fecha: $_POST[fechaReporte] HASTA $_POST[fechaReporte2]</p>",0,0,false,true,'C',true);
+        $this->Ln(10,true);
     }
 
     // Page footer
@@ -76,11 +81,8 @@ $pdf->SetSubject('TCPDF Tutorial');
 $pdf->SetKeywords("TCPDF, PDF, reporte, sistemas, $_POST[fechaReporte], $_POST[fechaReporte2]");
 
 // set default header data
-$pdf->SetHeaderData('logo_comprolab.png', PDF_HEADER_LOGO_WIDTH, 'Reporte de sistemas', 'Reporte Actividades Sistemas');
 
 // set header and footer fonts
-$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 
 // set default monospaced font
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
@@ -110,7 +112,6 @@ $pdf->SetFont('helvetica', 'B', 20);
 // add a page
 $pdf->AddPage();
 
-$pdf->Ln(5,true);
 
 $pdf->SetFont('helvetica', '', 8);
 
@@ -156,7 +157,7 @@ ob_start();
 
             }
         </style>
-            <h3 style="text-align: center;">Fecha: <?php echo $_POST['fechaReporte'] . " HASTA " . $_POST['fechaReporte2'] ?></h3>
+            <!-- <h3 style="text-align: center;">Fecha: <?php echo $_POST['fechaReporte'] . " HASTA " . $_POST['fechaReporte2'] ?></h3> -->
 
             
             <table cellspacing="0" cellpadding="5" id="example" class="">
@@ -173,7 +174,7 @@ ob_start();
                     <?php
                     while ($reg = mysqli_fetch_assoc($res)) {
                     ?>
-                        <tr>
+                        <tr >
                             <td style="width: 75px;"><?php echo $reg['fecha'] ?></td>
                             <td style="width: 90px;"><?php echo $reg['nombreTecnico'] ?></td>
                             <td style="width: 250px; word-break: break-word;">
@@ -186,12 +187,7 @@ ob_start();
                     ?>
                 </tbody>
                 <tfoot>
-                    <tr>
-                        <th style="font-weight: bold;">Fecha</th>
-                        <th style="font-weight: bold;">Nombre Técnico</th>
-                        <th style="font-weight: bold;">Tarea Realizada</th>
-                        <th style="font-weight: bold;">Observaciones</th>
-                    </tr>
+
                 </tfoot>
             </table>
             <center>

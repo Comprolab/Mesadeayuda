@@ -95,7 +95,7 @@ if ($reached_status_limit && $action !== 'edit_status') {
                     <th><?php echo $hesklang['status']; ?></th>
                     <th><?php echo $hesklang['csscl']; ?></th>
                     <th><?php echo $hesklang['tickets']; ?></th>
-                    <th><?php echo $hesklang['cbc']; ?></th>
+                    <!-- <th><?php echo $hesklang['cbc']; ?></th> -->
                     <th></th>
                 </tr>
                 </thead>

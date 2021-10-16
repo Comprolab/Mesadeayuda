@@ -267,11 +267,11 @@ if (false /*$_SESSION['rol'] == 2 */) {
                         hesk_checkPermission('can_run_reports', 0) ||
                         hesk_checkPermission('can_man_settings', 0)
                     ) {
-                        $pages = array('module_statistics', 'module_escalate');
-                        $open_menu = in_array($calling_script, $pages) ? 'current submenu-is-opened' : '';
+                        // $pages = array('module_statistics', 'module_escalate');
+                        // $open_menu = in_array($calling_script, $pages) ? 'current submenu-is-opened' : '';
                     ?>
 
-                        <li class="listitem submenu" <?php echo $open_menu; ?>>
+                        <!-- <li class="listitem submenu" <?php echo $open_menu; ?>>
                             <div class="listitem__icon">
                                 <a href="#">
                                     <svg class="icon icon-modules">
@@ -316,7 +316,7 @@ if (false /*$_SESSION['rol'] == 2 */) {
                                     </li>
                                 </ul>
                             </div>
-                        </li>
+                        </li> -->
 
                         <!-- <li class="listitem submenu <?php echo $open_menu; ?>">
                     <div class="listitem__icon">

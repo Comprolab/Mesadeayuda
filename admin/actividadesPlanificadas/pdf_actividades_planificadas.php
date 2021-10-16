@@ -184,14 +184,6 @@ ob_start();
                     }
                     ?>
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <th style="font-weight: bold;">Fecha</th>
-                        <th style="font-weight: bold;">Nombre Técnico</th>
-                        <th style="font-weight: bold;">Tarea Realizada</th>
-                        <th style="font-weight: bold;">Observaciones</th>
-                    </tr>
-                </tfoot>
             </table>
             <center>
 <?php

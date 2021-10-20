@@ -164,8 +164,8 @@ ob_start();
                 <thead>
                     <tr>
                         <th style="width: 75px; font-weight: bold;">Fecha</th>
-                        <th style="width: 90px; font-weight: bold;">Nombre Técnico</th>
-                        <th style="width: 250px; font-weight: bold;">Tarea Realizada</th>
+                        <th style="width: 90px; font-weight: bold;">Nombre del Técnico</th>
+                        <th style="width: 250px; font-weight: bold;">Tareas Realizadas</th>
                         <th style="width: 220px; font-weight: bold;">Observaciones</th>
                     </tr>
                 </thead>

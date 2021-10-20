@@ -69,9 +69,6 @@ function hesk_newTicket($ticket)
         $ticket['due_date'] = '';
     }
 
-	
-	
-
 
 	// Insert ticket into database
 	hesk_dbQuery("

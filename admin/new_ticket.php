@@ -244,6 +244,16 @@ if ( ! isset($_SESSION['as_priority']))
             </div>
             <div id="email_suggestions"></div>
             <div class="form-group">
+                <label for="comodato">Comodato</label>
+                <select name="zone" id="zone" class="form-control">
+                    <?php 
+                        $res = hesk_dbQuery("SELECT * FROM hesk_customers");
+                        while ($reg = hesk_dbFetchAssoc($res)) { ?>
+                            <option value="<?php echo $reg['id']; ?>"><?php echo $reg['nombre'] ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="form-group">
                 <label><?php echo $hesklang['priority']; ?>: <span class="important">*</span></label>
                 <div class="dropdown-select center out-close priority">
                     <select name="priority" <?php if (in_array('priority',$_SESSION['iserror'])) {echo ' class="isError" ';} ?> >

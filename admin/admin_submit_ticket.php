@@ -427,6 +427,8 @@ if ($tmpvar['owner'] > 0)
     $tmpvar['assignedby'] = ! empty($autoassign_owner) ? -1 : $_SESSION['id'];
 }
 
+$tmpvar['zone'] = $_POST['zone'];
+
 // Insert ticket to database
 $ticket = hesk_newTicket($tmpvar);
 

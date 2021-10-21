@@ -38,7 +38,15 @@ require(HESK_PATH . 'inc/common.inc.php');
 hesk_load_database_functions();
 
 hesk_dbConnect();
-$res = hesk_dbQuery("SELECT * FROM hesk_tareas_planificadas WHERE fecha BETWEEN '$_POST[fechaReporte]' AND '$_POST[fechaReporte2]'");
+$res = hesk_dbQuery("SELECT
+hrd.id,
+hrd.fecha,
+hrd.nombreTecnico,
+hrd.tareaRealizada,
+hrd.observaciones,
+hrd.cliente,
+hc.nombre
+FROM hesk_tareas_planificadas hrd LEFT JOIN hesk_customers hc ON hrd.cliente = hc.id WHERE (fecha BETWEEN '$_POST[fechaReporte]' AND '$_POST[fechaReporte2]') AND hrd.nombreTecnico LIKE '%$_POST[consTecnico]%'");
 
 class MYPDF extends TCPDF {
 
@@ -163,8 +171,9 @@ ob_start();
                     <tr>
                         <th style="width: 75px; font-weight: bold;">Fecha</th>
                         <th style="width: 90px; font-weight: bold;">Nombre del Técnico</th>
-                        <th style="width: 250px; font-weight: bold;">Tareas Realizadas</th>
-                        <th style="width: 220px; font-weight: bold;">Observaciones</th>
+                        <th style="width: 90px; font-weight: bold;">Cliente</th>
+                        <th style="width: 200px; font-weight: bold;">Tareas Realizadas</th>
+                        <th style="width: 180px; font-weight: bold;">Observaciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -175,10 +184,11 @@ ob_start();
                         <tr>
                             <td style="width: 75px;"><?php echo $reg['fecha'] ?></td>
                             <td style="width: 90px;"><?php echo $reg['nombreTecnico'] ?></td>
-                            <td style="width: 250px; word-break: break-word;">
+                            <td style="width: 90px;"><?php echo $reg['nombre'] ?></td>
+                            <td style="width: 200px; word-break: break-word;">
                                 <?php echo $reg['tareaRealizada'] ?>
                             </td>
-                            <td style="width: 220px;word-break: break-word;"><?php echo $reg['observaciones'] ?></td>
+                            <td style="width: 180px;word-break: break-word;"><?php echo $reg['observaciones'] ?></td>
                         </tr>
                     <?php
                     }

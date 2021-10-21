@@ -56,8 +56,22 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
             </div>
 
             <div class="form-group">
-                <label for="nombreTecnico">Nombre del técnico</label>
-                <input require value="<?php echo $_SESSION['name'] ?>" id="nombreTecnico" name="nombreTecnico" type="text" class="form-control">
+                <label for="nombreTecnico">Nombre del técnico o ingeniero</label>
+                <input readonly require value="<?php echo $_SESSION['name'] ?>" id="nombreTecnico" name="nombreTecnico" type="text" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="nombreCliente">Nombre del cliente</label>
+                <select name="cliente" id="cliente" class="form-control">
+                    <?php
+                    $res = hesk_dbQuery("SELECT * FROM hesk_customers");
+                    while ($reg = hesk_dbFetchAssoc($res)) {
+                    ?>
+                        <option value="<?php echo $reg['id'] ?>"><?php echo $reg['nombre'] ?></option>
+                    <?php
+                    }
+                    ?>
+                </select>
             </div>
 
             <div class="form-group">
@@ -77,7 +91,15 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
     </div>
 
     <?php
-    $queryRegDiario = "SELECT * FROM hesk_registros_diarios";
+    $queryRegDiario = "SELECT
+    hrd.id,
+    hrd.fecha,
+    hrd.nombreTecnico,
+    hrd.tareaRealizada,
+    hrd.observaciones,
+    hrd.cliente,
+    hc.nombre
+    FROM hesk_registros_diarios hrd LEFT JOIN hesk_customers hc ON hrd.cliente = hc.id";
     $resDiario = hesk_dbQuery($queryRegDiario);
     ?>
 
@@ -87,6 +109,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                 <tr>
                     <th>Fecha</th>
                     <th>Nombre Técnico</th>
+                    <th>Cliente</th>
                     <th>Tarea Realizada</th>
                     <th>Observaciones</th>
                     <th>Acciones</th>
@@ -99,10 +122,11 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                     <tr id="row<?php echo $reg['id'] ?>">
                         <td><?php echo $reg['fecha'] ?></td>
                         <td><?php echo $reg['nombreTecnico'] ?></td>
-                        <td style="min-width: 250px; word-break: break-word;">
+                        <td><?php echo $reg['nombre'] ?></td>
+                        <td style="min-width: 200px; word-break: break-word;">
                             <?php echo $reg['tareaRealizada'] ?>
                         </td>
-                        <td style="min-width: 250px;word-break: break-all;"><?php echo $reg['observaciones'] ?></td>
+                        <td style="min-width: 180px;word-break: break-all;"><?php echo $reg['observaciones'] ?></td>
                         <td>
                             <button id="eliminarActividadRealizada" onclick="eliminarActividad(<?php echo $reg['id'] ?>)"><i style="color: red;" class='fas fa-trash-alt'></i></button>
                         </td>
@@ -115,6 +139,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                 <tr>
                     <th>Fecha</th>
                     <th>Nombre Técnico</th>
+                    <th>Cliente</th>
                     <th>Tarea Realizada</th>
                     <th>Observaciones</th>
                     <th>Acciones</th>
@@ -123,7 +148,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
         </table>
         <hr>
-        <h1 class="h1est">Exportar por fecha</h1>
+        <h1 class="h1est">Exportar</h1>
         <form action="reportesDiarios/pdf_report_daily2.php" target="_blank" method="POST">
             <div class="form-group">
                 <input class="form-control" type="date" value="<?php echo date("Y-m-d") ?>" name="fechaReporte" id="fechaReporte">
@@ -131,6 +156,23 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
             <div class="form-group">
                 <input class="form-control" type="date" value="<?php echo date("Y-m-d") ?>" name="fechaReporte2" id="fechaReporte">
             </div>
+
+            <div class="form-group">
+                <select name="consTecnico" id="consTec">
+                    <option value="%">todos</option>
+                    <?php
+                    $query = "SELECT * FROM hesk_users WHERE rol = 1";
+                    $res = hesk_dbQuery($query);
+                    while ($reg = hesk_dbFetchAssoc($res)) {
+                    ?>
+                        <option value="<?php echo $reg['name'] ?>"><?php echo $reg['name'] ?></option>
+                    <?php
+                    }
+                    ?>
+
+                </select>
+            </div>
+
             <input type="submit" value="exportar" class="btnb btnb-info" id="fechaR">
         </form>
     </div>
@@ -141,17 +183,16 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
 <script>
-
-    function eliminarActividad(ids){
+    function eliminarActividad(ids) {
         $.ajax({
             type: 'POST',
             url: 'eliminarActividad.php',
             data: {
                 del_id: ids
             },
-            success: function(data){
+            success: function(data) {
                 alert("Se eliminó el registro !!");
-                $("#row"+ids).css("display","none");
+                $("#row" + ids).css("display", "none");
             }
         });
     }

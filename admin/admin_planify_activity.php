@@ -56,7 +56,20 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
             <div class="form-group">
                 <label for="nombreTecnico">Nombre del técnico</label>
-                <input require value="<?php echo $_SESSION['name'] ?>" id="nombreTecnico" name="nombreTecnico" type="text" class="form-control">
+                <input readonly require value="<?php echo $_SESSION['name'] ?>" id="nombreTecnico" name="nombreTecnico" type="text" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="cliente">Nombre del cliente</label>
+                <select name="cliente" id="cliente" class="form-control">
+                    <?php $res = hesk_dbQuery("SELECT * FROM hesk_customers");
+                    while ($reg = hesk_dbFetchAssoc($res)) {
+                    ?>
+                        <option value="<?php echo $reg['id'] ?>"><?php echo $reg['nombre'] ?></option>
+                    <?php
+                    }
+                    ?>
+                </select>
             </div>
 
             <div class="form-group">
@@ -76,7 +89,15 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
     </div>
 
     <?php
-    $queryRegDiario = "SELECT * FROM hesk_tareas_planificadas";
+    $queryRegDiario = "SELECT
+    hrd.id,
+    hrd.fecha,
+    hrd.nombreTecnico,
+    hrd.tareaRealizada,
+    hrd.observaciones,
+    hrd.cliente,
+    hc.nombre
+    FROM hesk_tareas_planificadas hrd LEFT JOIN hesk_customers hc ON hrd.cliente = hc.id";
     $resDiario = hesk_dbQuery($queryRegDiario);
     ?>
 
@@ -86,6 +107,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                 <tr>
                     <th>Fecha</th>
                     <th>Nombre Técnico</th>
+                    <th>Cliente</th>
                     <th>Tarea a Realizar</th>
                     <th>Observaciones</th>
                     <th>Acciones</th>
@@ -98,6 +120,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                     <tr id="row<?php echo $reg['id'] ?>">
                         <td><?php echo $reg['fecha'] ?></td>
                         <td><?php echo $reg['nombreTecnico'] ?></td>
+                        <td><?php echo $reg['nombre'] ?></td>
                         <td style="min-width: 250px; word-break: break-word;">
                             <?php echo $reg['tareaRealizada'] ?>
                         </td>
@@ -130,6 +153,23 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
             <div class="form-group">
                 <input class="form-control" type="date" value="<?php echo date("Y-m-d") ?>" name="fechaReporte2" id="fechaReporte">
             </div>
+
+            <div class="form-group">
+                <select name="consTecnico" id="consTec">
+                    <option value="%">todos</option>
+                    <?php
+                    $query = "SELECT * FROM hesk_users WHERE rol = 1";
+                    $res = hesk_dbQuery($query);
+                    while ($reg = hesk_dbFetchAssoc($res)) {
+                    ?>
+                        <option value="<?php echo $reg['name'] ?>"><?php echo $reg['name'] ?></option>
+                    <?php
+                    }
+                    ?>
+
+                </select>
+            </div>
+
             <input type="submit" value="exportar" class="btnb btnb-info" id="fechaR">
         </form>
     </div>
@@ -163,6 +203,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                 success: function(data) {
                     alert("Insersión exitosa!");
                     document.getElementById("formDailyActivity").reset();
+                    location.reload();
                 }
             });
         }

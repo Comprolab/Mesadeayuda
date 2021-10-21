@@ -8,6 +8,6 @@ hesk_session_start();
 hesk_dbConnect();
 
 
-$query = "INSERT INTO hesk_tareas_planificadas (fecha, nombreTecnico, tareaRealizada, observaciones) VALUES ('$_POST[fecha]','$_POST[nombreTecnico]','$_POST[tareaRealizada]','$_POST[observaciones]')";
+$query = "INSERT INTO hesk_tareas_planificadas (fecha, nombreTecnico, cliente, tareaRealizada, observaciones) VALUES ('$_POST[fecha]','$_POST[nombreTecnico]', $_POST[cliente],'$_POST[tareaRealizada]','$_POST[observaciones]')";
 echo $query;
 hesk_dbQuery($query);

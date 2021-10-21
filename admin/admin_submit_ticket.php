@@ -266,7 +266,7 @@ if (hesk_checkPermission('can_assign_others',0))
     // Automatically assign owner?
     elseif ($tmpvar['owner'] == -2 && $hesk_settings['autoassign'] == 1)
     {
-		$autoassign_owner = hesk_autoAssignTicket($tmpvar['category']);
+		$autoassign_owner = hesk_autoAssignTicket($tmpvar['category'],$_POST['zone']);
 		if ($autoassign_owner)
 		{
 			$tmpvar['owner']    = intval($autoassign_owner['id']);

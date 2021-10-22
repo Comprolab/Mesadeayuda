@@ -148,33 +148,99 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
         </table>
         <hr>
-        <h1 class="h1est">Exportar</h1>
-        <form action="reportesDiarios/pdf_report_daily2.php" target="_blank" method="POST">
-            <div class="form-group">
-                <input class="form-control" type="date" value="<?php echo date("Y-m-d") ?>" name="fechaReporte" id="fechaReporte">
-            </div>
-            <div class="form-group">
-                <input class="form-control" type="date" value="<?php echo date("Y-m-d") ?>" name="fechaReporte2" id="fechaReporte">
+
+        <div style="width: 100%; display: flex; justify-content: space-around;">
+            <div class="table-wrap" style="float: left; width: 45%;">
+                <h1 class="h1est">Exportar pdf</h1>
+                <form action="reportesDiarios/pdf_report_daily2.php" target="_blank" method="POST">
+                    <div class="form-group">
+                        <input class="form-control" style="width: 90%;" type="date" value="<?php echo date("Y-m-d") ?>" name="fechaReporte" id="fechaReporte">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" style="width: 90%;" type="date" value="<?php echo date("Y-m-d") ?>" name="fechaReporte2" id="fechaReporte">
+                    </div>
+
+                    <div class="form-group">
+                        <select class="form-control" style="width: 90%;" name="consTecnico" id="consTec">
+                            <option value="%">Todos los técnicos</option>
+                            <?php
+                            $query = "SELECT * FROM hesk_users WHERE rol = 1";
+                            $res = hesk_dbQuery($query);
+                            while ($reg = hesk_dbFetchAssoc($res)) {
+                            ?>
+                                <option value="<?php echo $reg['name'] ?>"><?php echo $reg['name'] ?></option>
+                            <?php
+                            }
+                            ?>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <select class="form-control" style="width: 90%;" name="consCliente" id="consCliente">
+                            <option value="%">Todos los clientes</option>
+                            <?php
+                            $query = "SELECT * FROM hesk_customers";
+                            $res = hesk_dbQuery($query);
+                            while ($reg = hesk_dbFetchAssoc($res)) {
+                            ?>
+                                <option value="<?php echo $reg['nombre'] ?>"><?php echo $reg['nombre'] ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+                    <input type="submit" value="exportar" class="btnb btnb-info" id="fechaR">
+                </form>
             </div>
 
-            <div class="form-group">
-                <select name="consTecnico" id="consTec">
-                    <option value="%">todos</option>
-                    <?php
-                    $query = "SELECT * FROM hesk_users WHERE rol = 1";
-                    $res = hesk_dbQuery($query);
-                    while ($reg = hesk_dbFetchAssoc($res)) {
-                    ?>
-                        <option value="<?php echo $reg['name'] ?>"><?php echo $reg['name'] ?></option>
-                    <?php
-                    }
-                    ?>
+            <div class="table-wrap" style="float: left; width: 45%;">
+                <h1 class="h1est">Exportar excel</h1>
+                <form action="reportesDiarios/excel_report_daily.php" target="_blank" method="POST">
+                <div class="form-group">
+                        <input class="form-control" style="width: 90%;" type="date" value="<?php echo date("Y-m-d") ?>" name="fechaReporte" id="fechaReporte">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" style="width: 90%;" type="date" value="<?php echo date("Y-m-d") ?>" name="fechaReporte2" id="fechaReporte">
+                    </div>
 
-                </select>
+                    <div class="form-group">
+                        <select class="form-control" style="width: 90%;" name="consTecnico" id="consTec">
+                            <option value="%">Todos los técnicos</option>
+                            <?php
+                            $query = "SELECT * FROM hesk_users WHERE rol = 1";
+                            $res = hesk_dbQuery($query);
+                            while ($reg = hesk_dbFetchAssoc($res)) {
+                            ?>
+                                <option value="<?php echo $reg['name'] ?>"><?php echo $reg['name'] ?></option>
+                            <?php
+                            }
+                            ?>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <select class="form-control" style="width: 90%;" name="consCliente" id="consCliente">
+                            <option value="%">Todos los clientes</option>
+                            <?php
+                            $query = "SELECT * FROM hesk_customers";
+                            $res = hesk_dbQuery($query);
+                            while ($reg = hesk_dbFetchAssoc($res)) {
+                            ?>
+                                <option value="<?php echo $reg['nombre'] ?>"><?php echo $reg['nombre'] ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+                    <input type="submit" value="exportar" class="btnb btnb-info" id="fechaR">
+                </form>
             </div>
+        </div>
 
-            <input type="submit" value="exportar" class="btnb btnb-info" id="fechaR">
-        </form>
     </div>
 
 </div>

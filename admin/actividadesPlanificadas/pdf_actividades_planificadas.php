@@ -46,7 +46,7 @@ hrd.tareaRealizada,
 hrd.observaciones,
 hrd.cliente,
 hc.nombre
-FROM hesk_tareas_planificadas hrd LEFT JOIN hesk_customers hc ON hrd.cliente = hc.id WHERE (fecha BETWEEN '$_POST[fechaReporte]' AND '$_POST[fechaReporte2]') AND hrd.nombreTecnico LIKE '%$_POST[consTecnico]%'");
+FROM hesk_tareas_planificadas hrd LEFT JOIN hesk_customers hc ON hrd.cliente = hc.id WHERE (fecha BETWEEN '$_POST[fechaReporte]' AND '$_POST[fechaReporte2]') AND hrd.nombreTecnico LIKE '%$_POST[consTecnico]%' AND hc.nombre LIKE '%$_POST[consCliente]%'");
 
 class MYPDF extends TCPDF {
 

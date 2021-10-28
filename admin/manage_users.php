@@ -609,7 +609,64 @@ function new_user()
         $myuser['features'] = '';
     }
 
-    echo "$myuser[ubicacion]";
+    $myuser['catU'] = $_POST['catU'];
+    echo "INSERT INTO `" . hesk_dbEscape($hesk_settings['db_pfix']) . "users` (
+        `user`,
+        `pass`,
+        `isadmin`,
+        `name`,
+        `email`,
+        `signature`,
+        `categories`,
+        `autoassign`,
+        `heskprivileges`,
+        `afterreply`,
+        `autostart`,
+        `autoreload`,
+        `notify_customer_new`,
+        `notify_customer_reply`,
+        `show_suggested`,
+        `notify_new_unassigned`,
+        `notify_overdue_unassigned`,
+        `notify_new_my`,
+        `notify_overdue_my`,
+        `notify_reply_unassigned`,
+        `notify_reply_my`,
+        `notify_assigned`,
+        `notify_pm`,
+        `notify_note`,
+        `rol`,
+        `ubicacion`,
+        `categoria`
+        ) VALUES (
+        '" . hesk_dbEscape($myuser['user']) . "',
+        '" . hesk_dbEscape($myuser['pass']) . "',
+        '" . intval($myuser['isadmin']) . "',
+        '" . hesk_dbEscape($myuser['name']) . "',
+        '" . hesk_dbEscape($myuser['email']) . "',
+        '" . hesk_dbEscape($myuser['signature']) . "',
+        '" . hesk_dbEscape($myuser['categories']) . "',
+        '" . intval($myuser['autoassign']) . "',
+        '" . hesk_dbEscape($myuser['features']) . "',
+        '" . ($myuser['afterreply']) . "' ,
+        '" . ($myuser['autostart']) . "' ,
+        '" . ($myuser['autoreload']) . "' ,
+        '" . ($myuser['notify_customer_new']) . "' ,
+        '" . ($myuser['notify_customer_reply']) . "' ,
+        '" . ($myuser['show_suggested']) . "' ,
+        '" . ($myuser['notify_new_unassigned']) . "' ,
+        '" . ($myuser['notify_overdue_unassigned']) . "',
+        '" . ($myuser['notify_new_my']) . "' ,
+        '" . ($myuser['notify_overdue_my']) . "' ,
+        '" . ($myuser['notify_reply_unassigned']) . "' ,
+        '" . ($myuser['notify_reply_my']) . "' ,
+        '" . ($myuser['notify_assigned']) . "' ,
+        '" . ($myuser['notify_pm']) . "',
+        '" . ($myuser['notify_note']) . "',
+        '" . ($myuser['rolU']) . "',
+        '" . $myuser['ubicacion'] . "',
+        '" . $myuser['catU'] ."'
+        )";
 
     hesk_dbQuery("INSERT INTO `" . hesk_dbEscape($hesk_settings['db_pfix']) . "users` (
 	`user`,
@@ -637,7 +694,8 @@ function new_user()
 	`notify_pm`,
 	`notify_note`,
     `rol`,
-    `ubicacion`
+    `ubicacion`,
+    `categoria`
 	) VALUES (
 	'" . hesk_dbEscape($myuser['user']) . "',
 	'" . hesk_dbEscape($myuser['pass']) . "',
@@ -664,7 +722,8 @@ function new_user()
 	'" . ($myuser['notify_pm']) . "',
 	'" . ($myuser['notify_note']) . "',
     '" . ($myuser['rolU']) . "',
-    '" . $myuser['ubicacion'] . "'
+    '" . $myuser['ubicacion'] . "',
+    '" . $myuser['catU'] ."'
 	)");
 
     $_SESSION['seluser'] = hesk_dbInsertID();

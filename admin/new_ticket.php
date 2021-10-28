@@ -228,20 +228,28 @@ if ( ! isset($_SESSION['as_priority']))
 
             <div class="form-group">
                 <label for="create_name">
-                    <?php echo $hesklang['name']; ?>: <span class="important">*</span>
+                    <?php echo $hesklang['name']." del cliente"; ?>: <span class="important">*</span>
                 </label>
                 <input type="text" id="create_name" name="name" class="form-control <?php if (in_array('name',$_SESSION['iserror'])) {echo 'isError';} ?>" maxlength="50" value="<?php if (isset($_SESSION['as_name'])) {echo stripslashes(hesk_input($_SESSION['as_name']));} ?>">
             </div>
             <div class="form-group">
                 <label for="email">
-                    <?php echo $hesklang['email'] . ':' . ($hesk_settings['require_email'] ? ' <span class="important">*</span>' : '') ; ?>
+                    <?php echo $hesklang['email']." del cliente". ':' . ($hesk_settings['require_email'] ? ' <span class="important">*</span>' : '') ; ?>
                 </label>
-                <input type="<?php echo ($hesk_settings['multi_eml'] ? 'text' : 'email'); ?>"
+                <input readonly="true" value="correoCliente@inhabilitado.com" type="<?php echo ($hesk_settings['multi_eml'] ? 'text' : 'email'); ?>"
                        class="form-control <?php if (in_array('email',$_SESSION['iserror'])) {echo 'isError';} elseif (in_array('email',$_SESSION['isnotice'])) {echo 'isNotice';} ?>"
                        name="email" id="email" maxlength="1000"
                        value="<?php if (isset($_SESSION['as_email'])) {echo stripslashes(hesk_input($_SESSION['as_email']));} ?>"
                     <?php if($hesk_settings['detect_typos']) { echo ' onblur="Javascript:hesk_suggestEmail(\'email\', \'email_suggestions\', 1, 1)"'; } ?>>
             </div>
+
+            <div class="form-group">
+                <label for="telefono">
+                    Teléfono
+                </label>
+                <input type="number" class="form-control" name="telefono" id="telefono">
+            </div>
+
             <div id="email_suggestions"></div>
             <div class="form-group">
                 <label for="comodato">Comodato</label>
@@ -494,7 +502,7 @@ if ( ! isset($_SESSION['as_priority']))
             if ( hesk_dbNumRows($res) )
             {
                 ?>
-                <script language="javascript" type="text/javascript"><!--
+                <script language="javascript" type="text/javascript">//<!--
                     // -->
                     var myMsgTxt = new Array();
                     var mySubjectTxt = new Array();

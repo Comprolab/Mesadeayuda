@@ -539,11 +539,11 @@ if (false /*$_SESSION['rol'] == 2 */) {
                             </div>
                         </li>
                     <?php endif; ?>
-                    <!---menu calendar --->
+                    <!---menu calendar 
                     <li class="listitem submenu <?php echo $open_menu; ?>">
                         <div class="listitem__icon">
                             <a class="icon icon-settings" href="#">
-                                <!-- <img src="<?php echo HESK_PATH; ?>img/calendar2.png"> -->
+                                 <img src="<?php echo HESK_PATH; ?>img/calendar2.png"> 
                                 <i class="fas fa-calendar-plus fa-2x icon icon-settings"></i>
                                 <svg class="icon icon-settings">
                                     <use xlink:href="<?php echo HESK_PATH; ?>img/sprite.svg#icon-zone"></use>
@@ -564,7 +564,7 @@ if (false /*$_SESSION['rol'] == 2 */) {
 
                             </ul>
                         </div>
-                    </li>
+                    </li>--->
 
                     <!--fin menu calrendar--->
 

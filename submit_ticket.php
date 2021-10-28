@@ -503,6 +503,7 @@ if ($hesk_settings['attachments']['use'] && ! empty($attachments) )
 }
 // zona que viene desde el formulario en create-ticket.php
 $tmpvar['zone'] = $_POST['ticketzone'];
+$tmpvar['telefono'] = $_POST['telefono'];
 // Insert ticket to database
 $ticket = hesk_newTicket($tmpvar);
 

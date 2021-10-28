@@ -19,7 +19,6 @@ hesk_isLoggedIn();
 
 $id = $_GET['cas'];
 $idUsu = $_GET['cas2'];
-echo $id;
 $sql1 = "DELETE FROM hesk_customers WHERE id = '$id'";
 
 hesk_dbQuery($sql1);

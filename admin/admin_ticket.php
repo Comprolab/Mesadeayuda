@@ -892,6 +892,10 @@ $options = array(
                             }
                             ?>
                             <li class="noclose">
+                                <span class="title">Telefono:</span>
+                                <span class="value"><a href="#"><?php echo $ticket['telefonoContacto']; ?></a></span>
+                            </li>
+                            <li class="noclose">
                                 <span class="title"><?php echo $hesklang['ip']; ?>:</span>
                                 <span class="value">
                                     <?php

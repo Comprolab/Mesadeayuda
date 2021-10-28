@@ -428,6 +428,7 @@ if ($tmpvar['owner'] > 0)
 }
 
 $tmpvar['zone'] = $_POST['zone'];
+$tmpvar['telefono'] = $_POST['telefono'];
 
 // Insert ticket to database
 $ticket = hesk_newTicket($tmpvar);

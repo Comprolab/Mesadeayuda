@@ -56,7 +56,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
             </div>
 
             <div class="form-group">
-                <label for="nombreTecnico">Nombre del técnico o ingeniero</label>
+                <label for="nombreTecnico">Nombre del Profesional</label>
                 <input readonly require value="<?php echo $_SESSION['name'] ?>" id="nombreTecnico" name="nombreTecnico" type="text" class="form-control">
             </div>
 
@@ -84,22 +84,35 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                 <textarea id="observaciones" name="observaciones" type="text" class="form-control" style="width: 100%;"></textarea>
             </div>
 
-            <input type="button" onclick="registarDiario()" value="Registar" id="btnRegistrar" class="btnb btnb-primary">
+            <input type="button" onclick="registarDiario()" value="Registrar" id="btnRegistrar" class="btnb btnb-primary">
 
         </form>
         <p id="mssg"></p>
     </div>
 
     <?php
-    $queryRegDiario = "SELECT
-    hrd.id,
-    hrd.fecha,
-    hrd.nombreTecnico,
-    hrd.tareaRealizada,
-    hrd.observaciones,
-    hrd.cliente,
-    hc.nombre
-    FROM hesk_registros_diarios hrd LEFT JOIN hesk_customers hc ON hrd.cliente = hc.id";
+    if ($_SESSION['isadmin'] == 1) {
+        $queryRegDiario = "SELECT
+        hrd.id,
+        hrd.fecha,
+        hrd.nombreTecnico,
+        hrd.tareaRealizada,
+        hrd.observaciones,
+        hrd.cliente,
+        hc.nombre
+        FROM hesk_registros_diarios hrd LEFT JOIN hesk_customers hc ON hrd.cliente = hc.id";
+    } else {
+        $queryRegDiario = "SELECT
+        hrd.id,
+        hrd.fecha,
+        hrd.nombreTecnico,
+        hrd.tareaRealizada,
+        hrd.observaciones,
+        hrd.cliente,
+        hc.nombre
+        FROM hesk_registros_diarios hrd LEFT JOIN hesk_customers hc ON hrd.cliente = hc.id
+        WHERE hrd.nombreTecnico LIKE '$_SESSION[name]'";
+    }
     $resDiario = hesk_dbQuery($queryRegDiario);
     ?>
 
@@ -108,7 +121,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
             <thead>
                 <tr>
                     <th>Fecha</th>
-                    <th>Nombre Técnico</th>
+                    <th>Nombre Profesional</th>
                     <th>Cliente</th>
                     <th>Tarea Realizada</th>
                     <th>Observaciones</th>
@@ -138,7 +151,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
             <tfoot>
                 <tr>
                     <th>Fecha</th>
-                    <th>Nombre Técnico</th>
+                    <th>Nombre Profesional</th>
                     <th>Cliente</th>
                     <th>Tarea Realizada</th>
                     <th>Observaciones</th>
@@ -198,7 +211,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
             <div class="table-wrap" style="float: left; width: 45%;">
                 <h1 class="h1est">Exportar excel</h1>
                 <form action="reportesDiarios/excel_report_daily.php" target="_blank" method="POST">
-                <div class="form-group">
+                    <div class="form-group">
                         <input class="form-control" style="width: 90%;" type="date" value="<?php echo date("Y-m-d") ?>" name="fechaReporte" id="fechaReporte">
                     </div>
                     <div class="form-group">
@@ -291,7 +304,11 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
         $('#example').DataTable({
             "language": {
                 "url": "../language/es/datatable.json"
-            }
+            },
+            "order": [
+                [0, "desc"],
+                [1, "desc"]
+            ]
         });
     });
 </script>

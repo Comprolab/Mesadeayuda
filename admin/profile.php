@@ -101,7 +101,7 @@ if (defined('WARN_PASSWORD'))
             <div class="profile__edit">
                 <button class="btn btn--blue-border" data-action="profile-edit"><?php echo $hesklang['edit_profile']; ?></button>
             </div>
-            <a href="index.php?a=logout&token=<?php hesk_token_echo(); ?>" class="profile-log-out">
+            <a href="../index.php?a=logout&token=<?php hesk_token_echo(); ?>" class="profile-log-out">
                 <svg class="icon icon-log-out">
                     <use xlink:href="<?php echo HESK_PATH; ?>img/sprite.svg#icon-log-out"></use>
                 </svg>

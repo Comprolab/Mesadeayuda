@@ -57,7 +57,7 @@ function hesk_profile_tab($session_array = 'new', $is_profile_page = true)
         <div class="step-item step-<?php echo $current_step++; ?>">
             <div class="form-group">
                 <label for="prof_name"><?php echo $hesklang['real_name']; ?></label>
-                <input type="text" class="form-control <?php echo in_array('name', $errors) ? 'isError' : ''; ?>" id="prof_name" name="name" maxlength="50" value="<?php echo $_SESSION[$session_array]['name']; ?>">
+                <input readonly="true" type="text" class="form-control <?php echo in_array('name', $errors) ? 'isError' : ''; ?>" id="prof_name" name="name" maxlength="50" value="<?php echo $_SESSION[$session_array]['name']; ?>">
             </div>
             <div class="form-group">
                 <label for="prof_email"><?php echo $hesklang['email']; ?></label>
@@ -96,6 +96,18 @@ function hesk_profile_tab($session_array = 'new', $is_profile_page = true)
                     <select class="form-control" style="height: 40px; border-radius: 50px; border-color: black;" name="rolU" id="rolU">
                         <option value="1">Personal tecnico</option>
                         <option value="2">Cliente</option>
+                    </select>
+                    <label for="CatU">Categoría que atiende</label>
+                    <select class="form-control" style="height: 40px; border-radius: 50px; border-color: black;" name="catU" id="catU">
+                        <?php
+                        $query = "SELECT * FROM hesk_categories";
+                        $res = hesk_dbQuery($query);
+                        while ($reg = hesk_dbFetchAssoc($res)) {
+                            ?>
+                            <option value="<?php echo $reg['id'] ?>"><?php echo $reg['name'] ?></option>
+                            <?php
+                        }
+                        ?>
                     </select>
                 <?php } ?>
 

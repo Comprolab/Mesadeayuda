@@ -624,7 +624,7 @@ function hesk_autoAssignTicket($ticket_category,$ticket_zone)
 					    (SELECT COUNT(*) FROM `".hesk_dbEscape($hesk_settings['db_pfix'])."tickets` FORCE KEY (`statuses`) WHERE `owner`=`t1`.`id` AND `status` IN ('0','1','2','4','5') ) as `open_tickets`
 						FROM `".hesk_dbEscape($hesk_settings['db_pfix'])."users` AS `t1` JOIN `hesk_customers_users` AS `t2`
                         ON `t1`.`id` = `t2`.`idencargado`
-WHERE `t1`.`autoassign`='1' AND `rol` = '1' AND `t2`.`idcustomer` = $ticket_zone ORDER BY `open_tickets` ASC, RAND();");
+						WHERE `t1`.`autoassign`='1' AND `rol` = '1' AND `t1`.categoria LIKE '%$ticket_category%' AND `t2`.`idcustomer` = $ticket_zone ORDER BY `open_tickets` ASC, RAND();");
 
 	/* Loop through the rows and return the first appropriate one */
 	while ($myuser = hesk_dbFetchAssoc($res))

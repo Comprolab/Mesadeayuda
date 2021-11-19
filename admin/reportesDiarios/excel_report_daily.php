@@ -24,8 +24,14 @@ hc.nombre
 FROM hesk_registros_diarios hrd 
 LEFT JOIN hesk_customers hc 
 ON hrd.cliente = hc.id 
+JOIN hesk_users hu 
+ON hu.name = hrd.nombreTecnico 
+JOIN hesk_categories hca
+ON hu.categoria = hca.id 
 WHERE (fecha BETWEEN '$_POST[fechaReporte]' AND '$_POST[fechaReporte2]') 
-AND hrd.nombreTecnico LIKE '%$_POST[consTecnico]%' AND hc.nombre LIKE '%$_POST[consCliente]%'");
+AND hrd.nombreTecnico LIKE '%$_POST[consTecnico]%' 
+AND hc.nombre LIKE '%$_POST[consCliente]%' 
+AND hca.id IN $_POST[consCategoria] ORDER BY hrd.fecha,hrd.nombreTecnico");
 
 ?>
 

@@ -5,6 +5,7 @@ Tu ticket de soporte "%%SUBJECT%%" ha sido enviado.
 Respondemos a todos los tickets lo antes posible, en un plazo de 24 a 48 horas. Si prevemos que tu ticket tardará más tiempo, te informaremos enviándote un correo electrónico.
 
 ID de seguimiento del ticket: %%TRACK_ID%%
+ID secundario de seguimiento: %%ID%%
 
 Puedes ver el estado de tu ticket aquí:
 %%TRACK_URL%%

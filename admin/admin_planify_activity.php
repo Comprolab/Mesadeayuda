@@ -62,7 +62,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
             <div class="form-group">
                 <label for="cliente">Nombre del cliente</label>
                 <select name="cliente" id="cliente" class="form-control">
-                    <?php $res = hesk_dbQuery("SELECT * FROM hesk_customers");
+                    <?php $res = hesk_dbQuery("SELECT * FROM hesk_customers ORDER BY nombre");
                     while ($reg = hesk_dbFetchAssoc($res)) {
                     ?>
                         <option value="<?php echo $reg['id'] ?>"><?php echo $reg['nombre'] ?></option>
@@ -201,6 +201,29 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                         </select>
                     </div>
 
+                    <div class="form-group">
+                        <select style="width: 90%;" name="consCategoria" id="consCategoria" class="form-control">
+                            <?php
+                            $todas = "";
+                            $query1 = "SELECT id FROM hesk_categories;";
+                            $res1 = hesk_dbQuery($query1);
+                            while ($reg1 = hesk_dbFetchAssoc($res1)) {
+                               $todas = $todas.",".$reg1['id'];
+                            }
+                            ?>
+                            <option value="(0<?php echo $todas ?>)">Todas las categorías </option>
+                            <?php
+                            $query = "SELECT * FROM hesk_categories";
+                            $res = hesk_dbQuery($query);
+                            while ($reg = hesk_dbFetchAssoc($res)) {
+                            ?>
+                                <option value="(<?php echo $reg['id'] ?>)"><?php echo $reg['name'] ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+
                     <input type="submit" value="exportar" class="btnb btnb-info" id="fechaR">
                 </form>
             </div>
@@ -240,6 +263,29 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                             while ($reg = hesk_dbFetchAssoc($res)) {
                             ?>
                                 <option value="<?php echo $reg['nombre'] ?>"><?php echo $reg['nombre'] ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <select style="width: 90%;" name="consCategoria" id="consCategoria" class="form-control">
+                            <?php
+                            $todas = "";
+                            $query1 = "SELECT id FROM hesk_categories;";
+                            $res1 = hesk_dbQuery($query1);
+                            while ($reg1 = hesk_dbFetchAssoc($res1)) {
+                               $todas = $todas.",".$reg1['id'];
+                            }
+                            ?>
+                            <option value="(0<?php echo $todas ?>)">Todas las categorías </option>
+                            <?php
+                            $query = "SELECT * FROM hesk_categories";
+                            $res = hesk_dbQuery($query);
+                            while ($reg = hesk_dbFetchAssoc($res)) {
+                            ?>
+                                <option value="(<?php echo $reg['id'] ?>)"><?php echo $reg['name'] ?></option>
                             <?php
                             }
                             ?>

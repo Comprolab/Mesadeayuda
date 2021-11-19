@@ -133,6 +133,7 @@ function hesk_newTicket($ticket)
 	'priority'		=> $ticket['priority'],
 	'owner'			=> $ticket['owner'],
 	'trackid'		=> $ticket['trackid'],
+	'idTicket'		=> $ticket['id'],
 	'status'		=> 0,
 	'name'			=> $ticket['name'],
 	'last_reply_by'	=> $ticket['name'],

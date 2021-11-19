@@ -64,7 +64,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                 <label for="nombreCliente">Nombre del cliente</label>
                 <select name="cliente" id="cliente" class="form-control">
                     <?php
-                    $res = hesk_dbQuery("SELECT * FROM hesk_customers");
+                    $res = hesk_dbQuery("SELECT * FROM hesk_customers ORDER BY nombre");
                     while ($reg = hesk_dbFetchAssoc($res)) {
                     ?>
                         <option value="<?php echo $reg['id'] ?>"><?php echo $reg['nombre'] ?></option>
@@ -133,21 +133,21 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                 while ($reg = hesk_dbFetchAssoc($resDiario)) {
                 ?>
                     <tr id="row<?php echo $reg['id'] ?>">
-                        <td><?php echo $reg['fecha'] ?></td>
-                        <td><?php echo $reg['nombreTecnico'] ?></td>
-                        <td><?php echo $reg['nombre'] ?></td>
-                        <td style="min-width: 200px; word-break: break-word;">
-                            <?php echo $reg['tareaRealizada'] ?>
-                        </td>
-                        <td style="min-width: 180px;word-break: break-all;"><?php echo $reg['observaciones'] ?></td>
+                        <td id="rowFecha<?php echo $reg['id'] ?>"><?php echo $reg['fecha'] ?></td>
+                        <td id="rowNombreT<?php echo $reg['id'] ?>"><?php echo $reg['nombreTecnico'] ?></td>
+                        <td id="rowNombreCliente<?php echo $reg['id'] ?>"><?php echo $reg['nombre'] ?></td>
+                        <td id="rowTarea<?php echo $reg['id'] ?>" style="min-width: 200px; word-break: break-word;"><?php echo $reg['tareaRealizada'] ?></td>
+                        <td id="rowObservaciones<?php echo $reg['id'] ?>" style="min-width: 180px;word-break: break-all;"><?php echo $reg['observaciones'] ?></td>
                         <td>
                             <button id="eliminarActividadRealizada" onclick="eliminarActividad(<?php echo $reg['id'] ?>)"><i style="color: red;" class='fas fa-trash-alt'></i></button>
+                            <button onclick="openEditModal(<?php echo $reg['id'] ?>);"><i style="color: green;" class='fas fa-edit'></i></button>
                         </td>
                     </tr>
                 <?php
                 }
                 ?>
             </tbody>
+
             <tfoot>
                 <tr>
                     <th>Fecha</th>
@@ -160,6 +160,92 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
             </tfoot>
 
         </table>
+
+        <!-- Modal de edicion -->
+        <div id="id01" class="w3-modal">
+            <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+
+                <header class="w3-container w3-teal">
+                    <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                    <h2>Editar registro</h2>
+                </header>
+
+
+                <form id="formActualizar" class="w3-container">
+                    <div class="w3-section">
+                        <div class="form-group">
+                            <label for="fechaEdit">fecha</label>
+                            <input id="fechaEdit" name="fechaEdit" type="date" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nombreTecnicoEdit">Nombre del Profesional</label>
+                            <input readonly require id="nombreTecnicoEdit" name="nombreTecnicoEdit" type="text" class="form-control">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="tareaRealizadaEdit">Tarea realizada</label>
+                            <textarea id="tareaRealizadaEdit" name="tareaRealizadaEdit" type="text" class="form-control" style="width: 100%;"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="observacionesEdit">Observaciones</label>
+                            <textarea id="observacionesEdit" name="observacionesEdit" type="text" class="form-control" style="width: 100%;"></textarea>
+                        </div>
+
+                    </div>
+                </form>
+
+                <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+                    <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancelar</button>
+                    <button id="btnActualizar" onclick="actualizarTarea($('#formActualizar').attr('ide'))" class="w3-right w3-padding btnb btnb-info">Actualizar</button>
+                </div>
+
+            </div>
+        </div>
+        <script>
+            function openEditModal(id) {
+
+                var fecha = $("#rowFecha" + id).text();
+                var nomT = $("#rowNombreT" + id).text();
+                var tarea = $("#rowTarea" + id).text();
+                var obs = $("#rowObservaciones" + id).text();
+                $("#fechaEdit").attr("value", fecha);
+                $("#nombreTecnicoEdit").attr("value", nomT);
+                $("#tareaRealizadaEdit").val(tarea);
+                $("#tareaRealizadaEdit").attr("value", tarea);
+                $("#observacionesEdit").val(obs);
+                $("#observacionesEdit").attr("value", obs);
+                $("#formActualizar").attr("ide", id);
+                document.getElementById('id01').style.display = 'block';
+
+            }
+
+            function actualizarTarea(id) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'updateDailyActivity.php',
+                    data: {
+                        fechaEdit: $("#fechaEdit").attr("value"),
+                        nombreTecnicoEdit: $("#nombreTecnicoEdit").attr("value"),
+                        tareaRealizadaEdit: document.getElementById("tareaRealizadaEdit").value,
+                        observacionesEdit: document.getElementById("observacionesEdit").value,
+                        id_act: id
+                    },
+                    success: function(data) {
+                        document.getElementById('id01').style.display = 'none';
+                        location.reload();
+
+                    },
+                    error: function(data) {
+                        alert("ERROR: " + data);
+                    }
+                });
+            }
+        </script>
+        <!-- Fin Modal de edicion -->
         <hr>
 
         <div style="width: 100%; display: flex; justify-content: space-around;">
@@ -198,6 +284,29 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                             while ($reg = hesk_dbFetchAssoc($res)) {
                             ?>
                                 <option value="<?php echo $reg['nombre'] ?>"><?php echo $reg['nombre'] ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <select style="width: 90%;" name="consCategoria" id="consCategoria" class="form-control">
+                            <?php
+                            $todas = "";
+                            $query1 = "SELECT id FROM hesk_categories;";
+                            $res1 = hesk_dbQuery($query1);
+                            while ($reg1 = hesk_dbFetchAssoc($res1)) {
+                                $todas = $todas . "," . $reg1['id'];
+                            }
+                            ?>
+                            <option value="(0<?php echo $todas ?>)">Todas las categorías </option>
+                            <?php
+                            $query = "SELECT * FROM hesk_categories";
+                            $res = hesk_dbQuery($query);
+                            while ($reg = hesk_dbFetchAssoc($res)) {
+                            ?>
+                                <option value="(<?php echo $reg['id'] ?>)"><?php echo $reg['name'] ?></option>
                             <?php
                             }
                             ?>
@@ -249,6 +358,29 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                         </select>
                     </div>
 
+                    <div class="form-group">
+                        <select style="width: 90%;" name="consCategoria" id="consCategoria" class="form-control">
+                            <?php
+                            $todas = "";
+                            $query1 = "SELECT id FROM hesk_categories;";
+                            $res1 = hesk_dbQuery($query1);
+                            while ($reg1 = hesk_dbFetchAssoc($res1)) {
+                                $todas = $todas . "," . $reg1['id'];
+                            }
+                            ?>
+                            <option value="(0<?php echo $todas ?>)">Todas las categorías </option>
+                            <?php
+                            $query = "SELECT * FROM hesk_categories";
+                            $res = hesk_dbQuery($query);
+                            while ($reg = hesk_dbFetchAssoc($res)) {
+                            ?>
+                                <option value="(<?php echo $reg['id'] ?>)"><?php echo $reg['name'] ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+
                     <input type="submit" value="exportar" class="btnb btnb-info" id="fechaR">
                 </form>
             </div>
@@ -263,17 +395,44 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
 <script>
     function eliminarActividad(ids) {
-        $.ajax({
-            type: 'POST',
-            url: 'eliminarActividad.php',
-            data: {
-                del_id: ids
-            },
-            success: function(data) {
-                alert("Se eliminó el registro !!");
-                $("#row" + ids).css("display", "none");
+
+        Swal.fire({
+            title: '¿Estás seguro de eliminar esta actividad?',
+            timer: 10000,
+            timerProgressBar: true,
+            icon: 'warning',
+            iconColor: 'red',
+            showCancelButton: true,
+            confirmButtonText: 'Si',
+            confirmButtonColor: 'red',
+            cancelButtonText: `Cancelar`,
+            allowEscapeKey: true,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'eliminarActividad.php',
+                    data: {
+                        del_id: ids
+                    },
+                    success: function(data) {
+                        $("#row" + ids).css("display", "none");
+                        Swal.fire({
+                            title: 'Eliminado!',
+                            icon: 'info', 
+                            timer: 1000,
+                            timerProgressBar: true
+                        })
+                    }
+                });
+
             }
-        });
+        })
+
+        /*
+        
+        */
     }
 
     function registarDiario() {
@@ -283,8 +442,25 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                 url: 'insertRegistroDiario.php',
                 data: $('#formDailyActivity').serialize(),
                 success: function(data) {
-                    alert("Insersión exitosa!");
-                    location.reload();
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Actividad Registrada',
+                        willClose: () => {
+                            location.reload();
+                        }
+                    })
                 }
             });
         }

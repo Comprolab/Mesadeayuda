@@ -252,6 +252,7 @@ function hesk_email2ticket($results, $protocol = 0, $set_category = 1, $set_prio
 		'priority'		=> $ticket['priority'],
 		'owner'			=> $ticket['owner'],
 		'trackid'		=> $ticket['trackid'],
+		'id'			=> $ticket['id'],
 		'status'		=> $ticket['status'],
 		'name'			=> $ticket['name'],
 		'lastreplier'	=> $ticket['lastreplier'],
@@ -322,7 +323,7 @@ function hesk_email2ticket($results, $protocol = 0, $set_category = 1, $set_prio
             $tmpvar['openedby'] = -1;
     }
 
-	$autoassign_owner = hesk_autoAssignTicket($tmpvar['category']);
+	$autoassign_owner = hesk_autoAssignTicket($tmpvar['category'],$_POST['ticketZone']);
 
 	#print_r($autoassign_owner);
 

@@ -228,13 +228,13 @@ if ( ! isset($_SESSION['as_priority']))
 
             <div class="form-group">
                 <label for="create_name">
-                    <?php echo $hesklang['name']." del cliente"; ?>: <span class="important">*</span>
+                    <?php echo $hesklang['name']." del solicitante"; ?>: <span class="important">*</span>
                 </label>
                 <input type="text" id="create_name" name="name" class="form-control <?php if (in_array('name',$_SESSION['iserror'])) {echo 'isError';} ?>" maxlength="50" value="<?php if (isset($_SESSION['as_name'])) {echo stripslashes(hesk_input($_SESSION['as_name']));} ?>">
             </div>
             <div class="form-group">
                 <label for="email">
-                    <?php echo $hesklang['email']." del cliente". ':' . ($hesk_settings['require_email'] ? ' <span class="important">*</span>' : '') ; ?>
+                    <?php echo $hesklang['email']." del solicitante". ':' . ($hesk_settings['require_email'] ? ' <span class="important">*</span>' : '') ; ?>
                 </label>
                 <input readonly="true" value="correoCliente@inhabilitado.com" type="<?php echo ($hesk_settings['multi_eml'] ? 'text' : 'email'); ?>"
                        class="form-control <?php if (in_array('email',$_SESSION['iserror'])) {echo 'isError';} elseif (in_array('email',$_SESSION['isnotice'])) {echo 'isNotice';} ?>"
@@ -245,14 +245,14 @@ if ( ! isset($_SESSION['as_priority']))
 
             <div class="form-group">
                 <label for="telefono">
-                    Teléfono
+                    Teléfono solicitante:
                 </label>
                 <input type="number" class="form-control" name="telefono" id="telefono">
             </div>
 
             <div id="email_suggestions"></div>
             <div class="form-group">
-                <label for="comodato">Comodato</label>
+                <label for="comodato">Cliente</label>
                 <select name="zone" id="zone" class="form-control">
                     <?php 
                         $res = hesk_dbQuery("SELECT * FROM hesk_customers");
@@ -261,6 +261,11 @@ if ( ! isset($_SESSION['as_priority']))
                     <?php } ?>
                 </select>
             </div>
+            <script>
+                $(document).ready(function(){
+                    $('#zone').select2();
+                });
+            </script>
             <div class="form-group">
                 <label><?php echo $hesklang['priority']; ?>: <span class="important">*</span></label>
                 <div class="dropdown-select center out-close priority">

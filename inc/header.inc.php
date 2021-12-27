@@ -43,11 +43,14 @@ include HESK_PATH.'fpdf/fpdf.php';
     <link rel="stylesheet" media="all" href="<?php echo HESK_PATH; ?>css/app<?php echo $hesk_settings['debug_mode'] ? '' : '.min'; ?>.css?<?php echo $hesk_settings['hesk_version']; ?>">
     <link rel="stylesheet" href="../iconsfontawesome/css/all.css">
     <link rel="stylesheet" href="<?php echo HESK_PATH; ?>css/w3.css">
-    <script src="<?php echo HESK_PATH; ?>js/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="<?php echo HESK_PATH; ?>css/select2.min.css">
 	<script type="text/javascript" src="<?php echo HESK_PATH; ?>js/hesk_javascript<?php echo $hesk_settings['debug_mode'] ? '' : '.min'; ?>.js?<?php echo $hesk_settings['hesk_version']; ?>"></script>
-    <script src="<?php echo HESK_PATH; ?>js/selectize.min.js"></script>
     
+    <script src="<?php echo HESK_PATH; ?>js/jquery-3.5.1.js"></script>
+    <script src="<?php echo HESK_PATH; ?>js/jquery-3.5.1.min.js"></script>
     <script src="<?php echo HESK_PATH; ?>js/sweetalert2.all.min.js"></script>
+    <script src="<?php echo HESK_PATH; ?>js/select2.min.js"></script>
+    <script src="<?php echo HESK_PATH; ?>js/selectize.min.js"></script>
 
     <?php
 	/* Tickets shouldn't be indexed by search engines */

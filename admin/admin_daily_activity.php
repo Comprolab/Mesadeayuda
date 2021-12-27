@@ -389,8 +389,6 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
     </div>
 
 </div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
 <script>
@@ -476,7 +474,9 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
         return true;
     }
 
+
     $(document).ready(function() {
+
         $('#example').DataTable({
             "language": {
                 "url": "../language/es/datatable.json"
@@ -486,6 +486,9 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                 [1, "desc"]
             ]
         });
+
+        
+        $('#cliente').select2();
     });
 </script>
 <?php require_once(HESK_PATH . 'inc/footer.inc.php'); ?>

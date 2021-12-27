@@ -72,6 +72,12 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                 </select>
             </div>
 
+            <script>
+                $(document).ready(function() {
+                    $('#cliente').select2();
+                });
+            </script>
+
             <div class="form-group">
                 <label for="tareaRealizada">Tarea a realizar</label>
                 <textarea id="tareaRealizada" name="tareaRealizada" type="text" class="form-control" style="width: 100%;"></textarea>
@@ -99,7 +105,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
         hrd.cliente,
         hc.nombre
         FROM hesk_tareas_planificadas hrd LEFT JOIN hesk_customers hc ON hrd.cliente = hc.id";
-    }else{
+    } else {
         $queryRegDiario = "SELECT
         hrd.id,
         hrd.fecha,
@@ -140,7 +146,13 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                         </td>
                         <td style="min-width: 250px;word-break: break-all;"><?php echo $reg['observaciones'] ?></td>
                         <td>
-                            <button id="eliminarActividadRealizada" onclick="eliminarActividad(<?php echo $reg['id'] ?>)"><i style="color: red;" class='fas fa-trash-alt'></i></button>
+                            <button class="" id="eliminarActividadRealizada" onclick="eliminarActividad(<?php echo $reg['id'] ?>)">
+                                <i style="color: red;" class='fas fa-trash-alt'></i>
+                            </button>
+
+                            <button id="EnviarActividad" onclick="actividadRealizada(<?php echo $reg['id'] ?>)">
+                                <i style="color: blue;" class="fas fa-check-square"></i>
+                            </button>
                         </td>
                     </tr>
                 <?php
@@ -208,7 +220,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                             $query1 = "SELECT id FROM hesk_categories;";
                             $res1 = hesk_dbQuery($query1);
                             while ($reg1 = hesk_dbFetchAssoc($res1)) {
-                               $todas = $todas.",".$reg1['id'];
+                                $todas = $todas . "," . $reg1['id'];
                             }
                             ?>
                             <option value="(0<?php echo $todas ?>)">Todas las categorías </option>
@@ -276,7 +288,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                             $query1 = "SELECT id FROM hesk_categories;";
                             $res1 = hesk_dbQuery($query1);
                             while ($reg1 = hesk_dbFetchAssoc($res1)) {
-                               $todas = $todas.",".$reg1['id'];
+                                $todas = $todas . "," . $reg1['id'];
                             }
                             ?>
                             <option value="(0<?php echo $todas ?>)">Todas las categorías </option>
@@ -300,10 +312,38 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
 <script>
+    function actividadRealizada(ids) {
+        $.ajax({
+            type: 'POST',
+            url: 'enviarActividad.php',
+            data: {
+                id: ids
+            },
+            success: function(data) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Actividad registrada como realizada!!'
+                })
+
+            }
+        });
+    }
+
     function eliminarActividad(ids) {
         $.ajax({
             type: 'POST',

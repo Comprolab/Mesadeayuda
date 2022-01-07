@@ -46,12 +46,12 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
 <div style="margin-left: 10px; padding-right: 10px;" class="main__content settings">
     <div class="table-wrap">
-        <h1 class="h1est">Tareas Planificadas</h1>
+        <h1 class="h1titulosimportantes">Tareas Planificadas</h1>
         <form action="" id="formDailyActivity" method="post" class="form">
 
             <div class="form-group">
                 <label for="fecha">fecha</label>
-                <input value="<?php echo date("Y-m-d"); ?>" id="fecha" name="fecha" type="date" class="form-control">
+                <input min="<?php echo date("Y-m-d", strtotime(date("Y-m-d"))); ?>" value="<?php echo date("Y-m-d"); ?>" id="fecha" name="fecha" type="date" class="form-control">
             </div>
 
             <div class="form-group">
@@ -88,7 +88,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                 <textarea id="observaciones" name="observaciones" type="text" class="form-control" style="width: 100%;"></textarea>
             </div>
 
-            <input type="button" onclick="registarDiario()" value="Registrar" id="btnRegistrar" class="btnb btnb-primary">
+            <input type="button" onclick="registarDiario()" value="Registrar tarea planificada" id="btnRegistrar" class="btnb btnb-primary">
 
         </form>
         <p id="mssg"></p>
@@ -316,32 +316,53 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 
 <script>
     function actividadRealizada(ids) {
-        $.ajax({
-            type: 'POST',
-            url: 'enviarActividad.php',
-            data: {
-                id: ids
-            },
-            success: function(data) {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 2000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
 
-                Toast.fire({
-                    icon: 'success',
-                    title: 'Actividad registrada como realizada!!'
-                })
+        Swal.fire({
+            title: '¿Estás seguro de que se realizó la actividad?',
+            timer: 10000,
+            timerProgressBar: true,
+            icon: 'info',
+            iconColor: 'darkblue',
+            showCancelButton: true,
+            confirmButtonText: 'Si',
+            confirmButtonColor: 'green',
+            cancelButtonText: `No`,
+            cancelButtonColor: 'darkblue',
+            allowEscapeKey: true,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'enviarActividad.php',
+                    data: {
+                        id: ids
+                    },
+                    success: function(data) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Actividad registrada como realizada!!'
+                        })
+
+                    }
+                });
 
             }
-        });
+        })
+
+
     }
 
     function eliminarActividad(ids) {

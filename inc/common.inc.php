@@ -2280,7 +2280,7 @@ function hesk_error($error,$showback=1) {
 
     $breadcrumb_link = empty($_SESSION['id']) ?
         $hesk_settings['hesk_url'] :
-        HESK_PATH . $hesk_settings['admin_dir'] . '/admin_main.php';
+        HESK_PATH . $hesk_settings['admin_dir'] . '/admin/admin_main.php';
 
     if (defined('TEMPLATE_PATH')) {
         $hesk_settings['render_template'](TEMPLATE_PATH . 'customer/error.php', array(

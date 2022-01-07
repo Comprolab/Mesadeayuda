@@ -1,0 +1,18 @@
+[15-Oct-2021 15:37:26 UTC] PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/comprola/public_html/mesadeayuda/admin/reporte1.php on line 195
+[15-Oct-2021 15:37:26 UTC] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/comprola/public_html/mesadeayuda/admin/reporte1.php on line 211
+[15-Oct-2021 15:37:26 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on null in /home/comprola/public_html/mesadeayuda/admin/reporte1.php:239
+Stack trace:
+#0 {main}
+  thrown in /home/comprola/public_html/mesadeayuda/admin/reporte1.php on line 239
+[15-Oct-2021 16:03:00 UTC] PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/comprola/public_html/mesadeayuda/admin/reporte1.php on line 195
+[15-Oct-2021 16:03:00 UTC] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/comprola/public_html/mesadeayuda/admin/reporte1.php on line 211
+[15-Oct-2021 16:03:00 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on null in /home/comprola/public_html/mesadeayuda/admin/reporte1.php:239
+Stack trace:
+#0 {main}
+  thrown in /home/comprola/public_html/mesadeayuda/admin/reporte1.php on line 239
+[15-Oct-2021 16:03:23 UTC] PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/comprola/public_html/mesadeayuda/admin/reporte1.php on line 195
+[15-Oct-2021 16:03:23 UTC] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/comprola/public_html/mesadeayuda/admin/reporte1.php on line 211
+[15-Oct-2021 16:03:23 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on null in /home/comprola/public_html/mesadeayuda/admin/reporte1.php:239
+Stack trace:
+#0 {main}
+  thrown in /home/comprola/public_html/mesadeayuda/admin/reporte1.php on line 239

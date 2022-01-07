@@ -47,12 +47,12 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
 <div style="margin-left: 10px; padding-right: 10px;" class="main__content settings">
     <a href="admin_planify_activity.php" class="btnb btnb-primary">Planificar</a>
     <div class="table-wrap">
-        <h1 class="h1est">Tareas Diarias</h1>
+        <h1 class="h1titulosimportantes">Tareas Diarias</h1>
         <form action="" id="formDailyActivity" method="post" class="form">
 
             <div class="form-group">
                 <label for="fecha">fecha</label>
-                <input value="<?php echo date("Y-m-d"); ?>" id="fecha" name="fecha" type="date" class="form-control">
+                <input max = "<?php echo date("Y-m-d");?>" value="<?php echo date("Y-m-d"); ?>" id="fecha" name="fecha" type="date" class="form-control">
             </div>
 
             <div class="form-group">
@@ -84,7 +84,7 @@ require_once(HESK_PATH . 'inc/show_admin_nav.inc.php');
                 <textarea id="observaciones" name="observaciones" type="text" class="form-control" style="width: 100%;"></textarea>
             </div>
 
-            <input type="button" onclick="registarDiario()" value="Registrar" id="btnRegistrar" class="btnb btnb-primary">
+            <input type="button" onclick="registarDiario()" value="Registrar tarea realizada" id="btnRegistrar" class="btnb btnb-primary">
 
         </form>
         <p id="mssg"></p>

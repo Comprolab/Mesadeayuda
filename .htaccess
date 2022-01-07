@@ -1,0 +1,5 @@
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^mesadeayuda\.comprolab\.com$
+RewriteRule ^/?$ "https\:\/\/www\.comprolab\.com\/mesadeayuda\/index\.php" [R=301,L]
+

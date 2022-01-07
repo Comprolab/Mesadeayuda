@@ -8,4 +8,5 @@ hesk_session_start();
 hesk_dbConnect();
 
 $query = "DELETE FROM hesk_registros_diarios WHERE id = '$_POST[del_id]'";
+echo $query;
 hesk_dbQuery($query);
